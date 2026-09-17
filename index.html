@@ -75,7 +75,8 @@
   .eb-head select{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:5px;
     font-size:12px;padding:3px 6px;}
   textarea.ed{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;
-    padding:8px 10px;font-size:14px;line-height:1.6;resize:vertical;outline:none;}
+    padding:8px 10px;font-size:14px;line-height:1.6;resize:vertical;outline:none;min-height:56px;}
+  .block strong{font-weight:700;color:#fff;}
   textarea.ed.mono{font-family:var(--mono);font-size:13px;white-space:pre;overflow-wrap:normal;tab-size:2;}
   textarea.ed:focus{border-color:var(--accent);}
   .addblock{display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);}
@@ -119,6 +120,19 @@ const LS_KEY='sm_data_v1';
 let DATA=null, activeTab=0, activeTopic={}, editMode=false;
 const $=s=>document.querySelector(s);
 const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtInline(s){return escHtml(s).replace(/\*\*([^*]+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');}
+function normalizeText(d){
+  d.tabs.forEach(tb=>tb.topics.forEach(tp=>{
+    const out=[];
+    tp.blocks.forEach(b=>{
+      if(b.t==='text'&&out.length&&out[out.length-1].t==='text')
+        out[out.length-1].v=(out[out.length-1].v.trim()+'\n\n'+b.v.trim()).trim();
+      else out.push(b);
+    });
+    tp.blocks=out;
+  }));
+}
 
 function save(){ localStorage.setItem(LS_KEY, JSON.stringify(DATA)); }
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400);}
@@ -130,6 +144,7 @@ async function load(){
     const res=await fetch('data.json?ts='+Date.now());
     DATA=await res.json();
   }
+  normalizeText(DATA); save();
   // default active topic per tab
   DATA.tabs.forEach((tb,i)=>{ if(activeTopic[i]==null) activeTopic[i]=tb.topics.length?tb.topics[0].id:null; });
   renderTabs(); renderTopics(); renderContent();
@@ -231,14 +246,24 @@ function viewBlock(b){
     cw.appendChild(pre);cw.appendChild(lang);cw.appendChild(cp);
     w.appendChild(cw);
   } else {
-    const p=el('p'); p.textContent=b.v; w.appendChild(p);
+    b.v.split(/\n{2,}/).forEach(par=>{ const p=el('p'); p.innerHTML=fmtInline(par); w.appendChild(p); });
   }
   return w;
 }
 
 function autosize(ta){ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight+2,600)+'px';}
+function boldSel(ta,b){
+  const s=ta.selectionStart,e=ta.selectionEnd;
+  const sel=ta.value.slice(s,e)||'bold text';
+  ta.value=ta.value.slice(0,s)+'**'+sel+'**'+ta.value.slice(e);
+  b.v=ta.value;save();
+  ta.focus();ta.selectionStart=s+2;ta.selectionEnd=s+2+sel.length;autosize(ta);
+}
 function editBlock(tp,b,idx){
   const w=el('div','edit-block');
+  const ta=el('textarea','ed'+(b.t==='code'?' mono':''));ta.value=b.v;
+  ta.oninput=()=>{b.v=ta.value;save();if(b.t!=='code')autosize(ta);};
+  ta.onkeydown=(e)=>{ if(b.t!=='code' && (e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='b'){ e.preventDefault(); boldSel(ta,b); } };
   const head=el('div','eb-head');
   head.appendChild(el('span','lbl',b.t==='code'?'Code':'Text'));
   if(b.t==='code'){
@@ -247,15 +272,18 @@ function editBlock(tp,b,idx){
       const o=document.createElement('option');o.value=l;o.textContent=l;if((b.lang||'js')===l)o.selected=true;sel.appendChild(o);});
     sel.onchange=()=>{b.lang=sel.value;save();};
     head.appendChild(sel);
+  } else {
+    const bold=el('button','small','𝗕 Bold');bold.title='Bold selected text (⌘/Ctrl+B)';
+    bold.onclick=()=>boldSel(ta,b);
+    head.appendChild(bold);
+    head.appendChild(el('span','hint','wrap **like this** for bold'));
   }
   const sp=el('span','sp');head.appendChild(sp);
-  const up=el('button','small','↑');up.onclick=()=>{if(idx>0){[tp.blocks[idx-1],tp.blocks[idx]]=[tp.blocks[idx],tp.blocks[idx-1]];save();renderContent();}};
-  const dn=el('button','small','↓');dn.onclick=()=>{if(idx<tp.blocks.length-1){[tp.blocks[idx+1],tp.blocks[idx]]=[tp.blocks[idx],tp.blocks[idx+1]];save();renderContent();}};
-  const rm=el('button','small danger','✕');rm.onclick=()=>{tp.blocks.splice(idx,1);save();renderContent();};
+  const up=el('button','small','↑');up.onclick=()=>{if(idx>0){[tp.blocks[idx-1],tp.blocks[idx]]=[tp.blocks[idx],tp.blocks[idx-1]];save();renderContent(getScroll());}};
+  const dn=el('button','small','↓');dn.onclick=()=>{if(idx<tp.blocks.length-1){[tp.blocks[idx+1],tp.blocks[idx]]=[tp.blocks[idx],tp.blocks[idx+1]];save();renderContent(getScroll());}};
+  const rm=el('button','small danger','✕');rm.onclick=()=>{tp.blocks.splice(idx,1);save();renderContent(getScroll());};
   head.appendChild(up);head.appendChild(dn);head.appendChild(rm);
   w.appendChild(head);
-  const ta=el('textarea','ed'+(b.t==='code'?' mono':''));ta.value=b.v;
-  ta.oninput=()=>{b.v=ta.value;save();if(b.t!=='code')autosize(ta);};
   w.appendChild(ta);
   setTimeout(()=>{if(b.t!=='code')autosize(ta);else ta.style.height=Math.min(Math.max(b.v.split('\n').length*20+20,80),600)+'px';},0);
   return w;
