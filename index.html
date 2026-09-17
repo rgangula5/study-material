@@ -261,8 +261,18 @@ function editBlock(tp,b,idx){
   return w;
 }
 
-function toggleEdit(){const s=getScroll();editMode=!editMode;$('#editBtn').classList.toggle('on',editMode);renderTopics();renderContent(s);
-  toast(editMode?'Edit mode on — changes save automatically':'Edit mode off');}
+function toggleEdit(){
+  const id=activeTopic[activeTab];               // topic you're currently on
+  editMode=!editMode;
+  $('#editBtn').classList.toggle('on',editMode);
+  renderTopics();renderContent();
+  if(id) setTimeout(()=>{
+    const sec=document.querySelector('.topic-section[data-id="'+CSS.escape(id)+'"]');
+    if(sec){ sec.scrollIntoView({block:'start'}); setActive(id);
+      const f=sec.querySelector('.topic-title-input'); if(f) f.focus({preventScroll:true}); }
+  },0);
+  toast(editMode?'Edit mode on — changes save automatically':'Edit mode off');
+}
 
 function addTopic(){
   const title=prompt('New topic title:'); if(!title) return;
