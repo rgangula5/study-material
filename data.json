@@ -1,0 +1,5085 @@
+{
+ "version": 1,
+ "tabs": [
+  {
+   "id": "css",
+   "label": "CSS",
+   "topics": [
+    {
+     "title": "Pre-Processors",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "There are different types of pre-processors"
+      },
+      {
+       "t": "text",
+       "v": "Sass: Syntactically Awesome Stylesheets: old version uses sass, newer versions use scss file extension (with more concise syntax)"
+      },
+      {
+       "t": "text",
+       "v": "Less: Leaner Style Sheets"
+      },
+      {
+       "t": "text",
+       "v": "Basically just syntax difference, otherwise majority same"
+      },
+      {
+       "t": "text",
+       "v": "What will the preprocessors have"
+      },
+      {
+       "t": "text",
+       "v": "Variables: just like any other variables in coding language, lets you use variables"
+      },
+      {
+       "t": "text",
+       "v": "Mixins: instead of repeating chunks in css, you can have mixin, it will take variables too"
+      },
+      {
+       "t": "text",
+       "v": "Functions: similar to mixins where it can take params, but difference is, use mixin to return a block of css code whereas use function to return a single value by calculating something based on need."
+      },
+      {
+       "t": "text",
+       "v": "Nesting: nesting css selectors to mimic html for readability"
+      },
+      {
+       "t": "text",
+       "v": "Lets you split css into multiple files for better maintainability"
+      },
+      {
+       "t": "text",
+       "v": "Directives used in preprocessors:"
+      },
+      {
+       "t": "text",
+       "v": "Above all: @mixin, @function"
+      },
+      {
+       "t": "text",
+       "v": "@return to return in function"
+      },
+      {
+       "t": "text",
+       "v": "@use , earlier to import we use @import but now in newer version we use @use"
+      },
+      {
+       "t": "text",
+       "v": "@include, to obviously refer to mixin, function"
+      },
+      {
+       "t": "text",
+       "v": "@error(error message during compilation) @warn @debug (to print to console log for debugging)"
+      },
+      {
+       "t": "text",
+       "v": "How to convert scss/sass/less to css: any build tool will do it, or manually you can install sass and run sass file.scss file.css to crate css file. But in real projects obviously you use build tools"
+      },
+      {
+       "t": "text",
+       "v": "Variables ($):"
+      },
+      {
+       "t": "text",
+       "v": "Like shown below you can create seperate variables file and use in actual scss or declare the same variables in main scss file"
+      },
+      {
+       "t": "code",
+       "lang": "scss",
+       "v": "// _variables.scss\n$primary-color: #3498db;\n$secondary-color: #2ecc71;\n$font-stack: 'Helvetica, Arial, sans-serif\n$base-font-size: 16px;\n\n2. Use Variables:\n\nOnce defined, you can use these variables through\nconsistency and makes it easy to update values in\n\n// styles.scss\n@import 'variables';\n\nbody {\n  font-family: $font-stack;\n  font-size: $base-font-size;"
+      },
+      {
+       "t": "text",
+       "v": "Mixins(@):"
+      },
+      {
+       "t": "code",
+       "lang": "scss",
+       "v": "Define a mixin using `@mixin` to group a set of CSS rules.\n\n// _mixins.scss\n@mixin border-radius($radius) {\n  border-radius: $radius;\n}\n\nUsing the Mixin:\n\nApply the mixin to elements with `@include`.\n\n// styles.scss\n@import 'mixins';\n\n.box {\n  @include border-radius(10px);\n  background-color: lightblue;\n  padding: 20px;\n}"
+      },
+      {
+       "t": "text",
+       "v": "Nesting:"
+      },
+      {
+       "t": "code",
+       "lang": "scss",
+       "v": "/* styles.scss */\nnav {\n  background-color: #333;\n  color: white;\n\n  ul {\n    list-style: none;\n    padding: 0;\n\n    li {\n      display: inline;\n      margin-right: 20px;\n\n      a {\n        color: white;\n        text-decoration: none;\n\n        &:hover {\n          text-decoration: underline;\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+       "t": "text",
+       "v": "Function: returning a font by doubling it"
+      },
+      {
+       "t": "code",
+       "lang": "scss",
+       "v": "@function double($size) {\n    @return $size * 2;\n    //20px  -> 40px   3rem -> 6rem\n}"
+      },
+      {
+       "t": "text",
+       "v": "Css:"
+      },
+      {
+       "t": "text",
+       "v": ".blue {"
+      },
+      {
+       "t": "text",
+       "v": "Padding: 1opx"
+      }
+     ],
+     "id": "pre-processors"
+    },
+    {
+     "title": "Reset CSS vs Normalize CSS",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Reset CSS is designed to remove all default browser styling. By setting margins, padding, and other elements to zero or neutral values, it eliminates the inconsistencies across different browsers. The goal is to start with a completely blank slate"
+      },
+      {
+       "t": "text",
+       "v": "The below setting in css is nothing but resetting CSS"
+      },
+      {
+       "t": "text",
+       "v": "* { margin: 0; padding: 0; box-sizing: border-box; }"
+      },
+      {
+       "t": "text",
+       "v": "Normalize CSS is bit modern way of setting the styles, instead of removing all browser styles, it ensures the important default styles are preserved and are consistent. If you still need some browser styling, but consistent across all browsers you use normalize CSS. This is just a statement in link tag"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css\">"
+      }
+     ],
+     "id": "reset-css-vs-normalize-css"
+    },
+    {
+     "title": "Flex Properties:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Container Properties:"
+      },
+      {
+       "t": "text",
+       "v": "Display: flex"
+      },
+      {
+       "t": "text",
+       "v": "flex-direction= row/column"
+      },
+      {
+       "t": "text",
+       "v": "justify-content= main axis"
+      },
+      {
+       "t": "text",
+       "v": "align-items=cross axis"
+      },
+      {
+       "t": "text",
+       "v": "Align-content = across cross axis- works onlyif multiple lines"
+      },
+      {
+       "t": "text",
+       "v": "Item Properties:"
+      },
+      {
+       "t": "text",
+       "v": "order: by default all items order 0, remaining else will come to end, Flex-grow: default 0, put it as 1, it will double the size, 1 to distribute for all"
+      },
+      {
+       "t": "text",
+       "v": "shrink: default 0 for no shrink if you set to 4, it will shrink 4 tyms as much as other items,"
+      },
+      {
+       "t": "text",
+       "v": "Align self: align individual items, cross axis"
+      }
+     ],
+     "id": "flex-properties"
+    },
+    {
+     "title": "Grid Properties",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Display: grid"
+      },
+      {
+       "t": "text",
+       "v": "Grid-template-rows / grid-template-columns: repeat(4, 1fr)"
+      },
+      {
+       "t": "text",
+       "v": "Column gap / row gap"
+      },
+      {
+       "t": "text",
+       "v": "Justify items: row axis (grid item) //here with in the each cell, items will move"
+      },
+      {
+       "t": "text",
+       "v": "Align items: column axis (grid item)"
+      },
+      {
+       "t": "text",
+       "v": "Example: start, end, center, strethc"
+      },
+      {
+       "t": "text",
+       "v": "Justify content: row (within container) //here cell itself moves"
+      },
+      {
+       "t": "text",
+       "v": "Align-content: column (within container)"
+      },
+      {
+       "t": "text",
+       "v": "Example: start, end Justify content: space between, space around, sace-evenly"
+      },
+      {
+       "t": "text",
+       "v": "—"
+      },
+      {
+       "t": "text",
+       "v": "Grid-column-start  grid-column end:  it will span 2 columns before screenshot"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "grid-column-start: 1;\ngrid-column-end: span 2;"
+      },
+      {
+       "t": "text",
+       "v": "Justify self, align self =>similar to justify items and align items"
+      }
+     ],
+     "id": "grid-properties"
+    },
+    {
+     "title": "Transform:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "First thing to learn while playing around with animations"
+      },
+      {
+       "t": "text",
+       "v": "Transform: translate(x,y)  => translate(50%)  translate(50%,75%).. Tran’slate’ - meaning pad"
+      },
+      {
+       "t": "text",
+       "v": "Transform: rotate(angle) => rotate(45deg)"
+      },
+      {
+       "t": "text",
+       "v": "Transform: scale(x,y) => scale(1.5, 1.75) it will make 1.5 times bigger in x direction"
+      },
+      {
+       "t": "text",
+       "v": "Transform: skew(x,y)=> skew(45deg,21deg)"
+      }
+     ],
+     "id": "transform"
+    },
+    {
+     "title": "Transition",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "How it should be animated over time is defined by Transition"
+      },
+      {
+       "t": "text",
+       "v": "First step to perform animations, if more in details you should check animation property"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "transition-property: width;\ntransition-duration: 4s;\ntransition-delay: 1s;\ntransition-timing-function: linear;"
+      },
+      {
+       "t": "text",
+       "v": "In below code, we are saying. Transform property change in 2 seconds, whereas background-color should be instant"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "transition: transform 2s linear, height 2s linear, background-color 0s;"
+      },
+      {
+       "t": "text",
+       "v": "When unhover, its coming back to original position with red"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "<head>\n  <style>\n    .parent {\n      background-color: hsla(200, 100%, 20%);\n      height: 400px;\n      width: 400px;\n    }\n\n    .child {\n      background-color: red;\n      height: 50%;\n      width: 50%;\n      transition: 1s;\n    }\n\n    .parent:hover .child {\n      background-color: green;\n      transform: translateX(100%);\n    }"
+      }
+     ],
+     "id": "transition"
+    },
+    {
+     "title": "Animations:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Animation-delay - by how many seconds or even negative as if it got started"
+      },
+      {
+       "t": "text",
+       "v": "Animation-iteration-count - infinite or number"
+      },
+      {
+       "t": "text",
+       "v": "Animation direction -"
+      },
+      {
+       "t": "text",
+       "v": "normal - forward - starting from 0% properties"
+      },
+      {
+       "t": "text",
+       "v": "reverse - reverse direction - starting from 100% properties"
+      },
+      {
+       "t": "text",
+       "v": "alternate - forward, reverse"
+      },
+      {
+       "t": "text",
+       "v": "alternate-reverse - reverse, forward"
+      },
+      {
+       "t": "text",
+       "v": "Animation-timing-function"
+      },
+      {
+       "t": "text",
+       "v": "ease - Specifies an animation with a slow start, then fast, then end slowly (this is default)"
+      },
+      {
+       "t": "text",
+       "v": "linear - start to end same speed"
+      },
+      {
+       "t": "text",
+       "v": "ease-in - slow start"
+      },
+      {
+       "t": "text",
+       "v": "ease-out - slow end"
+      },
+      {
+       "t": "text",
+       "v": "ease-in-out - slow start, slow end, but in middle fast"
+      },
+      {
+       "t": "text",
+       "v": "cubic-bezier(n,n,n,n) - Lets you define your own values in a cubic-bezier function"
+      },
+      {
+       "t": "text",
+       "v": "Animation-fill-mode"
+      },
+      {
+       "t": "text",
+       "v": "none - Default value. Animation will not apply any styles to the element before or after it is executing"
+      },
+      {
+       "t": "text",
+       "v": "forwards - after my animation starts set the properties at 100% key frame"
+      },
+      {
+       "t": "text",
+       "v": "backwards - before my animation starts set the properties at 0% key frame"
+      },
+      {
+       "t": "text",
+       "v": "both - backwards + forwards"
+      },
+      {
+       "t": "text",
+       "v": "Shorthand:"
+      },
+      {
+       "t": "text",
+       "v": "div {"
+      },
+      {
+       "t": "text",
+       "v": "animation: example 5s linear 2s infinite alternate;"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "text",
+       "v": "div {"
+      },
+      {
+       "t": "text",
+       "v": "animation-name: example;"
+      },
+      {
+       "t": "text",
+       "v": "animation-duration: 5s;"
+      },
+      {
+       "t": "text",
+       "v": "animation-timing-function: linear;"
+      },
+      {
+       "t": "text",
+       "v": "animation-delay: 2s;"
+      },
+      {
+       "t": "text",
+       "v": "animation-iteration-count: infinite;"
+      },
+      {
+       "t": "text",
+       "v": "animation-direction: alternate;"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "      height: 50%;\n      width: 50%;\n      transition: transform 1s ease-in;\n    }\n\n    .parent:hover .child {\n      animation: left-to-right 1s ease-in forwards;\n    }\n\n    @keyframes left-to-right {\n      0% {\n        transform: translateX(0);\n      }\n\n      33% {\n        transform: translateY(100%);\n      }\n\n      66% {\n        transform: translateX(100%) translateY(100%);\n      }\n\n      100% {\n        transform: translateX(100%);\n      }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"parent\">"
+      },
+      {
+       "t": "text",
+       "v": "At 0%, it should be top-left"
+      },
+      {
+       "t": "text",
+       "v": "At 33%, wrt to original position, it should be bottom-left"
+      },
+      {
+       "t": "text",
+       "v": "At 66%, wrt to original starting position, it should x and y direction"
+      },
+      {
+       "t": "text",
+       "v": "At 100%, just x direction"
+      }
+     ],
+     "id": "animations"
+    },
+    {
+     "title": "OverFlow property",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Visible is by default: data will flow out as needed"
+      },
+      {
+       "t": "text",
+       "v": "Hidden: will crop of the over portion"
+      },
+      {
+       "t": "text",
+       "v": "scroll: scroll will hide all overflowing content and cause scroll bars to appear on the element in question. If the content does not overflow, the scrollbars will still be visible, but disabled."
+      },
+      {
+       "t": "text",
+       "v": "auto: similar to scroll, but the scrollbars only appear when the content is overflowing."
+      }
+     ],
+     "id": "overflow-property"
+    },
+    {
+     "title": "What is Cascading?",
+     "blocks": [
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Text passage explaining Cascading in CSS and its three main principles: 1. Inheritance, 2. Specificity, 3. Order of Appearance.]"
+      }
+     ],
+     "id": "what-is-cascading"
+    },
+    {
+     "title": "Cascading vs Specificity:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Specificity of:"
+      },
+      {
+       "t": "text",
+       "v": "Inline: 1000 => 1,0,0,0"
+      },
+      {
+       "t": "text",
+       "v": "Id: 100 => 0,1,0,0"
+      },
+      {
+       "t": "text",
+       "v": "Class: 10 => 0,0,1,0"
+      },
+      {
+       "t": "text",
+       "v": "tag= 1 => 0,0,0,1"
+      },
+      {
+       "t": "text",
+       "v": "Specfiicity if pseudo class vs element => still depends on specificity of selector, ntg to do with pseudo"
+      }
+     ],
+     "id": "cascading-vs-specificity"
+    },
+    {
+     "title": "Combinator selectors. > +",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It lets you declare the relation between html elements and make you stye"
+      },
+      {
+       "t": "text",
+       "v": "Check bro code: youtube channel"
+      },
+      {
+       "t": "text",
+       "v": "Descendent=> space EXAMPLE: div p => all p tags in div"
+      },
+      {
+       "t": "text",
+       "v": "Child=> >   => space EXAMPLE: div p => direct childer p tags in div..if there is a p tag inside another div it wont highlight"
+      },
+      {
+       "t": "text",
+       "v": "General sibling will select all siblings => ~"
+      },
+      {
+       "t": "text",
+       "v": "Adjacent will select only nxt sibling, not all siblings => +"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "<!--\ncombinators = explains the relationship\n              between listed selectors\n                  = descendant\n              > = child\n              ~ = general sibling\n              + = adjacent sibling"
+      }
+     ],
+     "id": "combinator-selectors"
+    },
+    {
+     "title": "Global attributes:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "class, id, data-*, style etc"
+      },
+      {
+       "t": "text",
+       "v": "Look below screenshot to css how styling applied based on the data attribute"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Teaching slide titled ACCESS showing HTML divs with class, id, data-columns and data-index-number attributes, a browser mockup rendering three DIVs, and CSS rules using div::after with attr(data-columns), div[data-columns] attribute selectors, and div[data-columns='5'].]"
+      }
+     ],
+     "id": "global-attributes"
+    },
+    {
+     "title": "Replaced vs non-replaced",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "For video, image, iframe, eventhough they are inline, we can give height width"
+      }
+     ],
+     "id": "replaced-vs-non-replaced"
+    },
+    {
+     "title": "Block vs Inline",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "When you give display, the items of flex will have display property to “block”"
+      },
+      {
+       "t": "text",
+       "v": "You can give margin left and right to inline but not top and bottom"
+      },
+      {
+       "t": "text",
+       "v": "Hii in"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Two-column comparison table of Inline Elements vs Block Elements covering width occupancy, line starting, sitting behind other elements, and top/bottom margins.]"
+      }
+     ],
+     "id": "block-vs-inline"
+    },
+    {
+     "title": "linear-gradient() or radial-gradient()",
+     "blocks": [
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "<!-- HTML -->\n<div class=\"box\"></div>\n\n/* CSS */\n.box {\n  width: 50vw;\n  height: 50vh;\n  background-image: linear-gradient(red 10%, blue);\n}"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "<!-- HTML -->\n<div class=\"box\"></div>\n\n/* CSS */\n.box {\n  width: 50vw;\n  height: 50vh;\n  background-image: radial-gradient(red, blue);\n}"
+      }
+     ],
+     "id": "linear-gradient-or-radial-gradient"
+    },
+    {
+     "title": "Position Property",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Static: default"
+      },
+      {
+       "t": "text",
+       "v": "Relative: from idea location to wherever it can"
+      },
+      {
+       "t": "text",
+       "v": "Absolute: just putting absolute property, will make it look like the element doesn’t exist. Remaining elements will take over the place. If you add top, it will move with respect to screen…make parent element as some positon property then it will start moving with respect to that"
+      },
+      {
+       "t": "text",
+       "v": "is a CSS property that allows an element to be positioned relative to its nearest positioned ancestor, rather than relative to the document or its default position in the normal document flow."
+      },
+      {
+       "t": "text",
+       "v": "Fixed:  It will be used of navs. Bcoz it stays on the screen and its always wrt to entire html element"
+      },
+      {
+       "t": "text",
+       "v": "Sticky: it acts as a relative first..but when it starts moving away from the top: 0. It will act as fixed position"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <link href=\"styles.css\" rel=\"stylesheet\">\n  <title>Sticky Position Header</title>\n  <style>\n    .main-nav {\n      position: sticky;\n      top: 0;\n    }\n  </style>\n</head>"
+      }
+     ],
+     "id": "position-property"
+    },
+    {
+     "title": "Box model",
+     "blocks": [
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: CSS box model diagram showing nested layers - margin (50), border (5), padding (50) surrounding a content box of 794 x 160, with side values of 30, 5, 20 on left and 20, 5, 30 on right.]"
+      }
+     ],
+     "id": "box-model"
+    },
+    {
+     "title": "Display vs visibility",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "“display: none\" removes the element from the layout, while \"visibility: hidden\" hides the element while preserving its position"
+      }
+     ],
+     "id": "display-vs-visibility"
+    },
+    {
+     "title": "Pseudo element vs class",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Class: it used to changes the state of the element based on the user interaction. Example: hover, active, :visited, :link, :first-child,last-chhild,"
+      },
+      {
+       "t": "text",
+       "v": "Classes are used to apply styles to one or more elements"
+      },
+      {
+       "t": "text",
+       "v": "Check Pseudo Classes section:"
+      },
+      {
+       "t": "text",
+       "v": "Element: they are used to style the element like ::before, ::after. ::first-line, ::first-letter"
+      },
+      {
+       "t": "text",
+       "v": "Pseudo-elements target specific parts of an element"
+      }
+     ],
+     "id": "pseudo-element-vs-class"
+    },
+    {
+     "title": "Diff breakpoints for different devices",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Max 600px - extra small devices"
+      },
+      {
+       "t": "text",
+       "v": "600 - 700 - small devices"
+      },
+      {
+       "t": "text",
+       "v": "700-900 - tablets"
+      },
+      {
+       "t": "text",
+       "v": "900-1200 - laptop, desktop"
+      },
+      {
+       "t": "text",
+       "v": "Above 1200 - desktop, extra large device"
+      }
+     ],
+     "id": "diff-breakpoints-for-different-devices"
+    },
+    {
+     "title": "RWD with CSS",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Meta tag: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+      },
+      {
+       "t": "text",
+       "v": "Width tells to use the width of screen and zoom to be 1.0/"
+      },
+      {
+       "t": "text",
+       "v": "Meta tag was introduced in html5"
+      },
+      {
+       "t": "text",
+       "v": "Use rem and em"
+      },
+      {
+       "t": "text",
+       "v": "Media queries"
+      },
+      {
+       "t": "text",
+       "v": "Things you can do:"
+      },
+      {
+       "t": "text",
+       "v": "Do not use fixed large width elements which can overflow. Use percentages"
+      },
+      {
+       "t": "text",
+       "v": "Do not depend on particular viewport width while developing"
+      },
+      {
+       "t": "text",
+       "v": "Use media queries"
+      },
+      {
+       "t": "text",
+       "v": "Use grid and flex"
+      },
+      {
+       "t": "text",
+       "v": "Use frameworks"
+      }
+     ],
+     "id": "rwd-with-css"
+    },
+    {
+     "title": "New features of css3:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "flexbox and grid"
+      },
+      {
+       "t": "text",
+       "v": "Media queries"
+      },
+      {
+       "t": "text",
+       "v": "Box sizing"
+      },
+      {
+       "t": "text",
+       "v": "animation"
+      }
+     ],
+     "id": "new-features-of-css3"
+    },
+    {
+     "title": "em vs rem",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Rem is based on html font size. By default it will 16px"
+      },
+      {
+       "t": "text",
+       "v": "Em will be for parent."
+      },
+      {
+       "t": "text",
+       "v": "Lets say parent has 25px, and if you define 1.2 em. Then it will be 25*1.2 = px"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Slide showing HTML code <div style=\"font-size: 16px;\"> with a nested <p style=\"font-size: 1.25em;\">Hello world!</p>, annotated with the formula 16px * 1.25em = 20px.]"
+      }
+     ],
+     "id": "em-vs-rem"
+    },
+    {
+     "title": "PseudoClass-",
+     "blocks": [
+      {
+       "t": "text",
+       "v": ":first-child:"
+      },
+      {
+       "t": "text",
+       "v": ":last-child"
+      },
+      {
+       "t": "text",
+       "v": ":nth-child(n)"
+      },
+      {
+       "t": "text",
+       "v": "nth-last-child(n)"
+      },
+      {
+       "t": "text",
+       "v": "Only-of-type: p type tag should be only one in parent, if they are multiple nothing will be selected"
+      },
+      {
+       "t": "text",
+       "v": "First-of-type"
+      },
+      {
+       "t": "text",
+       "v": "Last-of-type"
+      },
+      {
+       "t": "text",
+       "v": "Nth-of-type"
+      },
+      {
+       "t": "text",
+       "v": "nth-last-of-type"
+      },
+      {
+       "t": "text",
+       "v": ":only-child: it should be the only child in parent, no other tags should be present"
+      },
+      {
+       "t": "text",
+       "v": ":empty: examples: <p class=\"empty-paragraph\"></p> OR <div class=\"empty-div\"></div>"
+      },
+      {
+       "t": "text",
+       "v": "If they are whitespaces, or anything inside a tag or a tag inside a tag, they are not empty"
+      },
+      {
+       "t": "text",
+       "v": "First-child:"
+      },
+      {
+       "t": "text",
+       "v": "If a p tag exists as first child in body tag or any div tag or any tag, it will be highlighted"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "p:first-child {\n   color: red;\n }"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "       <div>\n           <p>First paragraph</p>  //highlighted\n           <h2>First Heading</h2>\n           <p>Second paragraph</p>\n       </div>\n       <div>\n           <p>First paragraph in second div</p> //highlighted\n           <h2>Second Heading</h2>\n           <p>second paragraph in second div</p>\n       </div>\n       <p>First paragraph in second div</p> //noty highlighted bcoz its third element in <body>"
+      },
+      {
+       "t": "text",
+       "v": "If you want to target “outside para” and “para1” => first-of-type"
+      },
+      {
+       "t": "text",
+       "v": "First-of-type:"
+      },
+      {
+       "t": "text",
+       "v": "It will only highlight the elements type which are first, even if their is h1 tag before p tag, it will still highlight p tag bcoz p type is first element"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "       <div>\n           <p>First paragraph</p> //highlighted\n           <h2>First Heading</h2>\n           <p>Second paragraph</p>\n       </div>\n       <div>\n           <p>First paragraph in second div</p>  //highlighted\n           <h2>Second Heading</h2>\n           <p>second paragraph in second div</p>\n       </div>\n       <p>some para</p>  //highlighted (in first-child it will not be highlighted bcoz their its not first child, here p is first p type after 2 divs so gets highligted)\n       <p>other some para</p>"
+      },
+      {
+       "t": "text",
+       "v": "nth-child(5) => highlights 5th element in screnshot"
+      },
+      {
+       "t": "text",
+       "v": "nth-child(odd) => highlights all odd elements"
+      },
+      {
+       "t": "text",
+       "v": "nth-child(even) =>highlights all even elements"
+      },
+      {
+       "t": "text",
+       "v": "nth-child(4n) => every 4 elements will be selected"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "li:nth-child(9){\n    background-color: hsl(60, 100%, 78%);\n}"
+      },
+      {
+       "t": "text",
+       "v": ":first-child - Selects the first child element within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":last-child - Selects the last child element within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":nth-child(n) - Selects the nth child element within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":nth-last-child(n) - Selects the nth child element from the end within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":nth-of-type(n) - Selects the nth child of a specific type within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":nth-last-of-type(n) - Selects the nth child of a specific type from the end within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":only-child - Selects an element that is the only child of its parent."
+      },
+      {
+       "t": "text",
+       "v": ":only-of-type - Selects an element that is the only one of its type within its parent."
+      },
+      {
+       "t": "text",
+       "v": ":first-of-type - Selects the first child of a specific type within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":last-of-type - Selects the last child of a specific type within a parent."
+      },
+      {
+       "t": "text",
+       "v": ":empty - Selects elements that have no children (including text nodes)"
+      },
+      {
+       "t": "text",
+       "v": "Only-of-type"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<h1><h1>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>  // targeted"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "_______"
+      },
+      {
+       "t": "text",
+       "v": "____________________________________"
+      },
+      {
+       "t": "text",
+       "v": "First-of-type"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<h1><h1>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>  // targeted"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>  // targeted"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "_____________________________________"
+      },
+      {
+       "t": "text",
+       "v": "Last-of-type"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<h1><h1>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p> //targeted"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>  // targeted"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "<div>"
+      },
+      {
+       "t": "text",
+       "v": "<p></p>"
+      },
+      {
+       "t": "text",
+       "v": "]"
+      },
+      {
+       "t": "text",
+       "v": "<h1></h1 >"
+      },
+      {
+       "t": "text",
+       "v": "</div>"
+      },
+      {
+       "t": "text",
+       "v": "______"
+      },
+      {
+       "t": "text",
+       "v": "________________________________"
+      },
+      {
+       "t": "text",
+       "v": "____________________________________"
+      }
+     ],
+     "id": "pseudoclass"
+    },
+    {
+     "title": "How to make css browser cross compatible",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Normalize or reset CSS"
+      },
+      {
+       "t": "text",
+       "v": "Use browser style pre-fixes lik webtool kit, ms etc"
+      },
+      {
+       "t": "text",
+       "v": "Polyphils: they provide a fallback mechanism if some styles are not available in browsers, in script tag <script src=\"https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2\"></script>"
+      }
+     ],
+     "id": "how-to-make-css-browser-cross-compatible"
+    },
+    {
+     "title": "Mobile first and desktop first approaches:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "* A mobile website is more complex to style, so it’s practical and more efficient for the first focus to fix the mobile design."
+      },
+      {
+       "t": "text",
+       "v": "* It’s easier to rescale the mobile version than it's to scale down the desktop version."
+      },
+      {
+       "t": "text",
+       "v": "And generic point is, mobile users are high"
+      }
+     ],
+     "id": "mobile-first-and-desktop-first-approaches"
+    },
+    {
+     "title": "Float in css : flex and grid replaced",
+     "blocks": [
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "#img1{\n    float: left;\n    margin-right: 10px;\n}\n#img2{\n    float: right;\n    margin-left: 10px;\n}"
+      }
+     ],
+     "id": "float-in-css-flex-and-grid-replaced"
+    },
+    {
+     "title": "Bold vs strong",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Strong is used to emphasize the importance of it.. Whereas bold is to just grab the user attention"
+      },
+      {
+       "t": "text",
+       "v": "Bold tag is b"
+      },
+      {
+       "t": "text",
+       "v": "Strong tag is strong"
+      }
+     ],
+     "id": "bold-vs-strong"
+    },
+    {
+     "title": "Universal selector",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "{"
+      },
+      {
+       "t": "text",
+       "v": "margin: 0"
+      },
+      {
+       "t": "text",
+       "v": "Padding: 0 }"
+      },
+      {
+       "t": "text",
+       "v": "Browser defaulty puts some margin border, so to simple set to zero we can use universal selcetor"
+      }
+     ],
+     "id": "universal-selector"
+    },
+    {
+     "title": "Background-repeat, background-image",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "To whether repeat or not the image"
+      },
+      {
+       "t": "text",
+       "v": "Background-size = cover to set as wallpaper"
+      },
+      {
+       "t": "text",
+       "v": "’"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": ".main {\n    background-image: url(\"https://alumni-friends.br\n    height: 100%;\n    background-repeat:no-repeat;\n}\n\n.container {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    height: 100%;\n\n}\n\n.quote{\n    display: flex;\n    justify-content: center;\n    align-items: center;"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": ".main {\n    background-image: url(\"https://alumni-friends.br\n    height: 100%;\n    background-repeat:no-repeat;\n    background-size: cover;\n}\n\n.container {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    height: 100%;\n\n}\n\n.quote{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n}\n\n.title {\n    background-color: black;\n    color: white;\n    padding: 10px;"
+      }
+     ],
+     "id": "background-repeat-background-image"
+    },
+    {
+     "title": "CSS specificity",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Inline-style, Id,  class , element"
+      },
+      {
+       "t": "text",
+       "v": "If you specify as !iportant, even if it looses in specificity, it will be given priortiyy"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "  <style>\n  /* 0,0,1,1 */\n  h1.header {\n    color: red;\n  }\n\n\n  0,0,1,0\n  .header-2 {\n    color: green;\n  }"
+      },
+      {
+       "t": "code",
+       "lang": "css",
+       "v": "/* 0,1,0,0 */\n#header-id {\n  color: black;\n}\n\n/* 0,0,12,0 */\n.header-2 {\n  /* 1,0,0,0,0 */\n  color: green !important;\n}"
+      },
+      {
+       "t": "text",
+       "v": "I"
+      }
+     ],
+     "id": "css-specificity"
+    },
+    {
+     "title": "Box-sizing property?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "the box-sizing property allows developers to specify whether an element's declared width and height include its padding and border"
+      },
+      {
+       "t": "text",
+       "v": "Box-sizing : content-box or border-box"
+      },
+      {
+       "t": "text",
+       "v": "Default is: content-box"
+      },
+      {
+       "t": "text",
+       "v": "If you observe, border box will make sure the border is calculated within the width and height of div"
+      },
+      {
+       "t": "text",
+       "v": "Content box\t\t\t\t\t\tborder-box"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Rendered browser output showing a red square with a thick black border positioned above/overlapping a yellow square.]"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Text passage titled Box Sizing explaining box-sizing: content-box (default) and box-sizing: border-box.]"
+      }
+     ],
+     "id": "box-sizing-property"
+    },
+    {
+     "title": "Iframe",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It is used to embed content from another source into an HTML document…. Used for: ads"
+      },
+      {
+       "t": "text",
+       "v": "Most of the sites doesnt allow others to embed their content using iframe.."
+      },
+      {
+       "t": "text",
+       "v": "So the question is, how do they not allow others use it…."
+      },
+      {
+       "t": "text",
+       "v": "In http response header: “X-Frame-Options ” add DENY which will not allow any1 to use in iframe..Other options of X-Frame_options are SAME-ORIGIN and ALLOw-FROM"
+      },
+      {
+       "t": "code",
+       "lang": "html",
+       "v": "<!DOCTYPE html>\n\n\n<html>\n<head>\n    <title>My first website</title>\n</head>\n<body>\n\n    <!-- iframe = embed content from another source in\n                  ex. used for ads, used in many hacki\n\n    <iframe src=\"https://www.bing.com\" width=\"\"\n\n</body>"
+      }
+     ],
+     "id": "iframe"
+    }
+   ]
+  },
+  {
+   "id": "react",
+   "label": "React",
+   "topics": [
+    {
+     "title": "REACT INTERVIEW QUESTIONS",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "(build)"
+      },
+      {
+       "t": "text",
+       "v": "Vite - ,,,"
+      },
+      {
+       "t": "text",
+       "v": "WebPack"
+      },
+      {
+       "t": "text",
+       "v": "Tailwind (styling)-"
+      },
+      {
+       "t": "text",
+       "v": "Shadcn-UI (components) -"
+      },
+      {
+       "t": "text",
+       "v": "Zustand (global UI state) -"
+      },
+      {
+       "t": "text",
+       "v": "Tanstack Query (server state) -"
+      },
+      {
+       "t": "text",
+       "v": "Tanstack Router (routing) -"
+      }
+     ],
+     "id": "react-interview-questions"
+    },
+    {
+     "title": "Zustand vs Redux",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Less boiler plate, just a simple function and manage state. No need of creating actions, reducers, dispatching and middleware"
+      }
+     ],
+     "id": "zustand-vs-redux"
+    },
+    {
+     "title": "TroubleShooting or Debugging",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Use react dev tools: you can check component hierarchy, what props, states their, how frequent components getting rerendered, track component updates meaning to know why it got rerendered"
+      },
+      {
+       "t": "text",
+       "v": "React profiler, which is built in of dev tools"
+      },
+      {
+       "t": "text",
+       "v": "React testing library"
+      },
+      {
+       "t": "text",
+       "v": "?unit testing: jest"
+      },
+      {
+       "t": "text",
+       "v": "EsLint: a static code analysis to identify and fix problems, you can have syntax error found before, own rules, auto fixing… custom rules like, camel case, no console logging etc."
+      }
+     ],
+     "id": "troubleshooting-or-debugging"
+    },
+    {
+     "title": "Micro frnonend architecture:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Able to have different functional component into separate repos, deploy separate, while building they come together"
+      },
+      {
+       "t": "text",
+       "v": "Each micro service can use their own tech stack"
+      },
+      {
+       "t": "text",
+       "v": "Like shopping cart and product list two diff mucro services"
+      },
+      {
+       "t": "text",
+       "v": "How can they communicate between each other:"
+      },
+      {
+       "t": "text",
+       "v": "They can communicate using events, one can send event usint eventEmitter and other can listen to that event with addEventListerner"
+      },
+      {
+       "t": "text",
+       "v": "They can have event bus in middle where they can post and receive events data"
+      },
+      {
+       "t": "text",
+       "v": "Or they can use state management redux like this"
+      },
+      {
+       "t": "text",
+       "v": "Custom component Library:"
+      },
+      {
+       "t": "text",
+       "v": "Able to create components which can be used by other applications, like cdk library"
+      },
+      {
+       "t": "text",
+       "v": "Define scope and requirement of how each button form should be, which are used by different applications"
+      }
+     ],
+     "id": "micro-frnonend-architecture"
+    },
+    {
+     "title": "Unit Test Cases",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "They are used to test a component or piece of code in isolation to make sure its working as expected. They help you catch bugs, maintain code quality."
+      },
+      {
+       "t": "text",
+       "v": "Tools you can use:"
+      },
+      {
+       "t": "text",
+       "v": "Jest"
+      }
+     ],
+     "id": "unit-test-cases"
+    },
+    {
+     "title": "Why StrictMode",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "So react fundamentally tries to keep the rendering pure meaning when passing the input(state and props), it should always return the same output. So it makes sure few functions are pure to avoid unintendended side effects in application"
+      },
+      {
+       "t": "text",
+       "v": "What are some of the methods it run two times"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "componentDidMount\ncomponentDidUpdate\nuseEffect\nuseLayoutEffect"
+      },
+      {
+       "t": "text",
+       "v": "Examples:"
+      },
+      {
+       "t": "text",
+       "v": "For example, if your component sets up a WebSocket connection in useEffect, StrictMode will test if your cleanup logic correctly closes the WebSocket when the component unmounts."
+      },
+      {
+       "t": "text",
+       "v": ". If you have side effects that should be cleaned up (e.g., unsubscribing from a data source or clearing timers), running them twice helps identify whether your cleanup logic is working as intended"
+      }
+     ],
+     "id": "why-strictmode"
+    },
+    {
+     "title": "UseEffect",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It is used to perform side effects in functional components, like for example to perform tasks such as fetching data from api, performing subscriptions and for any DOM manipulations. It takes a setup function and array of dependencies as parameters"
+      }
+     ],
+     "id": "useeffect"
+    },
+    {
+     "title": "useState",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It provides a way to declare and manage state variables in functional components. It takes the initial state as a parameter and returns the current state and a ‘set function’ to update the state."
+      }
+     ],
+     "id": "usestate"
+    },
+    {
+     "title": "useRef",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "hook used for accessing and interacting with DOM elements, storing mutable values, and maintaining state across renders without causing re-renders."
+      }
+     ],
+     "id": "useref"
+    },
+    {
+     "title": "useLayoutEffect",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It allows you to perform side effects that affect the layout of the component.It takes a setup function and array of dependencies as parameters."
+      },
+      {
+       "t": "text",
+       "v": "Take away:"
+      },
+      {
+       "t": "text",
+       "v": "It runs synchronously, which means until this is run, browser painting will not start"
+      },
+      {
+       "t": "text",
+       "v": "Render -> Paint Screen -> useEffect  (MOSTTTTT of the times)"
+      },
+      {
+       "t": "text",
+       "v": "Render -> useLayout -> paint screen"
+      }
+     ],
+     "id": "uselayouteffect"
+    },
+    {
+     "title": "useForwardRef",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "generally parent componet cant acess child component dom element"
+      },
+      {
+       "t": "text",
+       "v": "▎ forwardRef gives the parent access to a DOM element rendered by the child."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "function App() {\n  const [value, setValue] = useState(\"red\")\n  const inputRef = useRef()\n\n  return (\n    <>\n      <CustomInput\n        ref={inputRef}\n        value={value}\n        onChange={e => setValue(e.target.value)}\n      />\n      <br />\n      <button onClick={() => inputRef.current.focus()}>Focus</button>"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "function CustomInput({ style, ...props }, ref) {\n  return (\n    <input\n      ref={ref}\n      {...props}\n      style={{\n        border: \"none\",\n        backgroundColor: \"lightpink\",\n        padding: \".25em\",\n        borderBottom: \".1em solid black\",\n        borderTopRightRadius: \".25em\",\n        borderTopLeftRadius: \".25em\",\n        ...style,\n      }}\n    />\n  )\n}\n\nexport default React.forwardRef(CustomInput)"
+      }
+     ],
+     "id": "useforwardref"
+    },
+    {
+     "title": "useImperativeHandle",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "same as forard ref, but here child component controls what can parent component to with its dom without giving full control"
+      },
+      {
+       "t": "text",
+       "v": "Its  a hook lets which lets you customize the handle exposed by ref"
+      },
+      {
+       "t": "text",
+       "v": "Or"
+      },
+      {
+       "t": "text",
+       "v": "is a React hook that allows a child component to expose an imperative API to a parent component"
+      },
+      {
+       "t": "text",
+       "v": "The parent can access this API by using the ref prop on the child component."
+      },
+      {
+       "t": "text",
+       "v": ". It allows the child to expose a specific API to the parent, while keeping its internal implementation hidden"
+      },
+      {
+       "t": "text",
+       "v": "Example: One example of where this might be useful is when you have a custom input component that needs to be controlled by a parent form. The input component might have internal state for managing focus, selection, and other aspects of user interaction. The parent form can use imperative handle to access this state and update the input as necessary, and not worry about every other child component in the parent component re-rendering with the form changes."
+      },
+      {
+       "t": "text",
+       "v": "From parent component you want to handle changes inside child component"
+      },
+      {
+       "t": "text",
+       "v": "It's a hook which allows certain functions or methods of child components to be exposed and accessible to parent components. This allows more control over the child components behavior, allowing the parent to directly with specific functionalities of child."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "function App() {\n  const [open, setOpen] = useState(false)\n  const modalRef = useRef()\n\n  return (\n    <>\n      <button onClick={() => setOpen(true)}>Open</button>\n      <button onClick={() => modalRef.current.focusCloseBtn()}>\n        Focus Close\n      </button>\n      <button onClick={() => modalRef.current.focusCloseBtn()}>Focus Confirm</button>\n      <button onClick={() => modalRef.current.focusdenyBtn()}>Focus Deny</button>\n      <ConfirmationModal\n        ref={modalRef}\n        isOpen={open}\n        onClose={() => setOpen(false)}\n      />"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "function ConfirmationModal({ isOpen, onClose }, ref) {\n  const closeRef = useRef()\n  const denyRef = useRef()\n  const confirmRef = useRef()\n  useImperativeHandle(ref, () => {\n    return {\n      focusCloseBtn: () => closeRef.current.focus(),\n      focusDenyBtn: () => denyRef.current.focus(),\n      focusConfirmBtn: () => confirmRef.current.focus(),\n    }\n  })\n\n  if (!isOpen) return null\n\n  return ("
+      }
+     ],
+     "id": "useimperativehandle"
+    },
+    {
+     "title": "useCallback (F)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It lets you cache function definitions between re-renders. It takes in the function that we want to cache and also the list of dependencies."
+      },
+      {
+       "t": "text",
+       "v": "Takeaway:"
+      },
+      {
+       "t": "text",
+       "v": "By default every line in the component is run and created but when you define something as callBack, due to referential equality, it doesn't get created and its same value which does not re-render."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "export default function App() {\n  const [number, setNumber] = useState(1)\n  const [dark, setDark] = useState(false)\n\n  const getItems = useCallback(() => {\n    return [number, number + 1, number + 2]\n  }, [number])\n\n  const theme = {\n    backgroundColor: dark ? '#333' : '#FFF',\n    color: dark ? '#FFF' : '#333'\n  }\n\n  return (\n    <div style={theme}>\n      <input\n        type=\"number\"\n        value={number}\n        onChange={e => setNumber(parseInt(e.target.value))}\n      />\n      <button onClick={() => setDark(prevDark => !prevDark)}>\n        Toggle theme\n      </button>\n      <List getItems={getItems} />\n    </div>"
+      }
+     ],
+     "id": "usecallback-f"
+    },
+    {
+     "title": "useMemo(V):",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It lets you cache the function result between re-renders.It takes in the function whose value we want to cache and also the list of dependencies."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "export default function App() {\n  const [number, setNumber] = useState(0)\n  const [dark, setDark] = useState(false)\n  const doubleNumber = useMemo(() => {\n    return slowFunction(number)\n  }, [number])\n  const themeStyles = {\n    backgroundColor: dark ? 'black' : 'white',\n    color: dark ? 'white' : 'black'\n  }\n\n  return (\n    <>\n      <input type=\"number\" value={number} onChange={e => setNumber(parseInt\n      (e.target.value))} />\n      <button onClick={() => setDark(prevDark => !prevDark)}>Change Theme</button>\n      <div style={themeStyles}>{doubleNumber}</div>\n    </>\n  )\n}\n\nfunction slowFunction(num) {\n  console.log('Calling Slow Function')\n  for (let i = 0; i <= 1000000000; i++) {}\n  return num * 2\n}"
+      }
+     ],
+     "id": "usememo-v"
+    },
+    {
+     "title": "useTransition",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It lets you update the state without blocking the UI. It allows you to make multiple state changes and allow you to rank them on how important we want them to be. It provides two values; one is isPending and startTransition Function."
+      },
+      {
+       "t": "text",
+       "v": "Takeaway:"
+      },
+      {
+       "t": "text",
+       "v": "In functional Component: useTransition"
+      },
+      {
+       "t": "text",
+       "v": "In class components: startTransition"
+      },
+      {
+       "t": "text",
+       "v": "It renders once more after transition hook code is completed. So instead of rendering once you are rendering twice"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "function App() {\n  const [isPending, startTransition] = useTransition()\n  const [input, setInput] = useState(\"\")\n  const [list, setList] = useState([])\n\n  const LIST_SIZE = 20000\n\n  function handleChange(e) {\n    setInput(e.target.value)\n    startTransition(() => {\n      const l = []\n      for (let i = 0; i < LIST_SIZE; i++) {\n        l.push(e.target.value)\n      }\n      setList(l)\n    })\n  }"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "        placeholder=\"Type here...\"\n      />\n      {isPending && <p>Update in progress...</p>}\n    </div>"
+      }
+     ],
+     "id": "usetransition"
+    },
+    {
+     "title": "useContext",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It's a hook which lets you manage state globally. Itstead of prop drilling, it lets you pass props from one parent to grand child components"
+      }
+     ],
+     "id": "usecontext"
+    },
+    {
+     "title": "useId",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It is used to generate unique Ids that can be passed to accessibility attributes"
+      },
+      {
+       "t": "text",
+       "v": "s"
+      },
+      {
+       "t": "text",
+       "v": "const id = useId()"
+      }
+     ],
+     "id": "useid"
+    },
+    {
+     "title": "useDebugValue:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Its  a hook which allow you to add a label to custom hooks. It isnt really helpful interms of implementing hte function but just for  for debugging and improving the developer experience."
+      }
+     ],
+     "id": "usedebugvalue"
+    },
+    {
+     "title": "useDeferredValue  vs useDebounce",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Both are similar, useDefered doesnt allow you to give duration whereas useDebounce does"
+      },
+      {
+       "t": "text",
+       "v": "useDeferred delays in applying batch updates"
+      },
+      {
+       "t": "text",
+       "v": "Used more in sense, to perform other tasks which are critical , and comeback to this later when no user itneration something like that"
+      },
+      {
+       "t": "text",
+       "v": "Debounce, every specified limit it updates the value"
+      },
+      {
+       "t": "text",
+       "v": "useDebounce: You use this to control how often a value should be updated based on a time delay. It’s about managing the frequency of updates."
+      },
+      {
+       "t": "text",
+       "v": "useDeferred: You use this to control the priority of updates and defer less critical state changes. It’s about optimizing rendering performance and managing update priority."
+      }
+     ],
+     "id": "usedeferredvalue-vs-usedebounce"
+    },
+    {
+     "title": "Custom Hooks",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "They are nothing but just javascript functions which allow you to encapsulate statefull logic across the components. The logic which is common to most of the components can be put here"
+      },
+      {
+       "t": "text",
+       "v": "In custom hook"
+      },
+      {
+       "t": "text",
+       "v": "return { count, increment, decrement, reset };"
+      },
+      {
+       "t": "text",
+       "v": "In component const { count, increment, decrement, reset } = useCounter(10);"
+      }
+     ],
+     "id": "custom-hooks"
+    },
+    {
+     "title": "Reconciliation",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "In interview start like this:"
+      },
+      {
+       "t": "text",
+       "v": "What it is:Its  a algorithm which kicks in when react tries to update DOM whenever there is  a state change happening in the component"
+      },
+      {
+       "t": "text",
+       "v": "What it uses: it uses something called as Virtual DOM which is a basically a lightweight copy of actual DOM which is stored in memory"
+      },
+      {
+       "t": "text",
+       "v": "So it compares virtual DOM or new state with virtual DOM of old state. If any changes, it will apply to real DOM"
+      },
+      {
+       "t": "text",
+       "v": "Link:"
+      },
+      {
+       "t": "text",
+       "v": "Reconciliation algorithm determines how the DOM changes in response to any state changes in the components."
+      },
+      {
+       "t": "text",
+       "v": "It used a Virtual DOM which is a light weight in memory representation of the actual DOM."
+      },
+      {
+       "t": "text",
+       "v": "It starts by comparing the virtual DOM of the previous state with the virtual DOM of the new state. If there are no changes, it will not make any changes to the real DOM. If there are any changes, it will update the Real DOM to match the new state."
+      },
+      {
+       "t": "text",
+       "v": "Order in which it efficiently re-conciles:"
+      },
+      {
+       "t": "text",
+       "v": "First, it checks if component type itself is changed, if type changes it will simply unmount and mount new component. Type means from simple text component to a complex component with multiple children"
+      },
+      {
+       "t": "text",
+       "v": "If type hasnt changed, it will compare the properties of the old and new components."
+      },
+      {
+       "t": "text",
+       "v": "If neither of properties or type changes, it will re-use the existing DOM node for that component which will avoid unnecessary re-renders"
+      },
+      {
+       "t": "text",
+       "v": "Steps in re-concile (RDRU):"
+      },
+      {
+       "t": "text",
+       "v": "Reconciliation algorithm = diff algorithm + handling mount/unmount/update components"
+      },
+      {
+       "t": "text",
+       "v": "Render Phase: When state changes, it creates a virtual DOM."
+      },
+      {
+       "t": "text",
+       "v": "Diffing Phase: it will identify the differences"
+      },
+      {
+       "t": "text",
+       "v": "Reconciliation: constructs list of minimal changes apply to actual DOM. this is called patch or diff"
+      },
+      {
+       "t": "text",
+       "v": "Update: applies those changes to actual DOM"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Numbered text explaining React's rendering process: 1. Render Phase, 2. Diffing Phase (with Keyed Elements and Component Identity), 3. Reconciliation, 4. Update Phase]"
+      }
+     ],
+     "id": "reconciliation"
+    },
+    {
+     "title": "Code splitting",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "So when we build the app, we bundle into into one single javascript file which will be loaded on user machine. So for performance reasons, the good thing is to have this file size optimal."
+      },
+      {
+       "t": "text",
+       "v": "Its a techqnieue we use to split the code into small, manageable chunks that can be loaded on demand."
+      },
+      {
+       "t": "text",
+       "v": "By using web packs, thru dynamic imports we can implement code splitting. For example from below screenshot, we wont load OtherComponent until its needed, in other words its lazy loaded. We use the suspense component to wrap lazy components and display a fallback content like loading indicator"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "import React, { Suspense } from 'react';\nconst OtherComponent = React.lazy(() => import('./OtherComponent'));\n\nfunction MyComponent() {\n  return (\n    <div>\n      <Suspense fallback={<div>Loading...</div>}>\n        <OtherComponent />\n      </Suspense>\n    </div>\n  );\n}"
+      }
+     ],
+     "id": "code-splitting"
+    },
+    {
+     "title": "Controlled vs Uncontrolled Components",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Controlled components:"
+      },
+      {
+       "t": "text",
+       "v": "These are form elements like input, textarea of select where the values are set and updated thru the react state. It has single source of truth. So controlled components ensure the fom data is handled by react state."
+      },
+      {
+       "t": "text",
+       "v": "Uncontrolled Components"
+      },
+      {
+       "t": "text",
+       "v": "They manage their own state without relying on react state."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "class UncontrolledComponent extends Component {\n  constructor(props) {\n    super(props);\n    // Create a ref to hold the input DOM element\n    this.inputRef = React.createRef();\n  }\n\n  handleSubmit = () => {\n    // Access the input value using the ref\n    console.log(this.inputRef.current.value);\n  }\n\n  render() {\n    return (\n      <div>\n        {/* Use ref attribute to attach the ref to the input eleme\n        <input\n          type=\"text\"\n          ref={this.inputRef}\n        />\n        <button onClick={this.handleSubmit}>Submit</button>\n      </div>\n    );\n  }"
+      }
+     ],
+     "id": "controlled-vs-uncontrolled-components"
+    },
+    {
+     "title": "How to Optimize Performance",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Virtualization technique: intersection observer - react virtualized"
+      },
+      {
+       "t": "text",
+       "v": "lazy liading images"
+      },
+      {
+       "t": "text",
+       "v": "use memo"
+      },
+      {
+       "t": "text",
+       "v": "use callback"
+      },
+      {
+       "t": "text",
+       "v": "code splitting"
+      },
+      {
+       "t": "text",
+       "v": "react fragments"
+      },
+      {
+       "t": "text",
+       "v": "use transition"
+      },
+      {
+       "t": "text",
+       "v": "Web workers: its  a process which runs in background. With high computational thing, main thread gets blocked, to avoid use web workers "
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "const sumButton = document.querySelector(\"#sumButton\")\nconst bgButton = document.querySelector(\"#bgButton\");\nsumButton.addEventListener(\"click\", (event) => {\n  let sum = 0;\n  for (let i = 0; i < 10000000000; i++)\n    sum += i;\n\n  alert(`The final sum is ${sum}`);\n});\n\nbgButton.addEventListener(\"click\", event => {\n  if(document.body.style.background !== \"green\")\n    document.body.style.background = \"green\";\n  else\n    document.body.style.background = \"blue\";\n});"
+      }
+     ],
+     "id": "how-to-optimize-performance"
+    },
+    {
+     "title": "Higher order Components:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Its a function that takes a component and returns a component. Used for reusing the components logic"
+      },
+      {
+       "t": "text",
+       "v": "Example validating the user session in every screen"
+      }
+     ],
+     "id": "higher-order-components"
+    },
+    {
+     "title": "Component life cycle methods",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Link:"
+      },
+      {
+       "t": "text",
+       "v": "MOUNT"
+      },
+      {
+       "t": "text",
+       "v": "Constructor"
+      },
+      {
+       "t": "text",
+       "v": "Get Derived State from Props"
+      },
+      {
+       "t": "text",
+       "v": "Render"
+      },
+      {
+       "t": "text",
+       "v": "Component Did Mount"
+      },
+      {
+       "t": "text",
+       "v": "UPDATE"
+      },
+      {
+       "t": "text",
+       "v": "Get Derived State from Props"
+      },
+      {
+       "t": "text",
+       "v": "Should Component Update"
+      },
+      {
+       "t": "text",
+       "v": "Render"
+      },
+      {
+       "t": "text",
+       "v": "Get Snapshot before Update"
+      },
+      {
+       "t": "text",
+       "v": "Component Did Update"
+      },
+      {
+       "t": "text",
+       "v": "UNMOUNT"
+      },
+      {
+       "t": "text",
+       "v": "Component will UnMount"
+      },
+      {
+       "t": "text",
+       "v": "ERROR HANDLING"
+      },
+      {
+       "t": "text",
+       "v": "Get Derived State from Props"
+      },
+      {
+       "t": "text",
+       "v": "Component did Catch"
+      },
+      {
+       "t": "text",
+       "v": "Few tips to remember: render will be third in first two"
+      }
+     ],
+     "id": "component-life-cycle-methods"
+    },
+    {
+     "title": "Notes",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Everything here documented is reference"
+      },
+      {
+       "t": "text",
+       "v": "But I prefer youtube, so refer to web dev simplified react router course"
+      },
+      {
+       "t": "text",
+       "v": "You need to setup using the package BrowserRouter for web application"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "import { BrowserRouter } from \"react-router-dom\""
+      },
+      {
+       "t": "text",
+       "v": "React Router Basics"
+      },
+      {
+       "t": "text",
+       "v": "Advanced Route Definitions"
+      },
+      {
+       "t": "text",
+       "v": "Handling Navigation"
+      },
+      {
+       "t": "text",
+       "v": "Routers In Depth"
+      }
+     ],
+     "id": "notes"
+    },
+    {
+     "title": "Basics:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "<Route path=”/” element={<Product />}      \t\t\t// it goes here"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/checkout” element={<checkout />}\t// if path checkout, it goes here"
+      },
+      {
+       "t": "text",
+       "v": "But with above thing, one has to enter in the browser to go that router, so in real time no one will do that, instead when somebody clicks it should go to component"
+      },
+      {
+       "t": "text",
+       "v": "For that purpose, we use <Link> Component"
+      },
+      {
+       "t": "text",
+       "v": "<li><Link to=”/”>Product</Link></li> => when user clicks on Link text, url will be updated with /"
+      },
+      {
+       "t": "text",
+       "v": "<li><Link to=”/checkout”>checkout</Link></li> => when user clicks on checkout text, url will be updated with /checkout"
+      }
+     ],
+     "id": "basics"
+    },
+    {
+     "title": "Router Types:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Browser Router: by default what we use"
+      },
+      {
+       "t": "text",
+       "v": "Hash Router: you will see #products List in"
+      },
+      {
+       "t": "text",
+       "v": "History router: unstable version"
+      },
+      {
+       "t": "text",
+       "v": "Memory Router: stores our history in memory, it will not change url…so useful in jenkins automation testing where you dont really have to change browser url"
+      },
+      {
+       "t": "text",
+       "v": "Static router:"
+      },
+      {
+       "t": "text",
+       "v": "Native router: native apps on mobile"
+      }
+     ],
+     "id": "router-types"
+    },
+    {
+     "title": "Dynamic Routes:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "What we did in basics section is good but with dynamic routes we can enhance that more, lets see how"
+      },
+      {
+       "t": "text",
+       "v": "If url is /books/3 => it goes to that last route"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "</nav>\n<Routes>\n  <Route path=\"/\" element={<Home />} />\n  <Route path=\"/books\" element={<BookList />} />\n  <Route path=\"/books/:id\" element={<BookList />} />\n</Routes>"
+      },
+      {
+       "t": "text",
+       "v": "Scenario 1:"
+      },
+      {
+       "t": "text",
+       "v": "Let's say somebody called /books/3, so it takes to that path, which sounds good. But how does BookList Component can read that id.. This is how it can do using useParams()"
+      },
+      {
+       "t": "text",
+       "v": "Const {id} = useParams()"
+      },
+      {
+       "t": "text",
+       "v": "Scenario 2:"
+      },
+      {
+       "t": "text",
+       "v": "Let's say somebody called /books/new, it goes to last route here. React is intelligent smart enough to see there is a hardcoded path so will use that instead of goind to third path here."
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Routes>\n  <Route path=\"/\" element={<Home />} />\n  <Route path=\"/books\" element={<BookList />} />\n  <Route path=\"/books/:id\" element={<Book />} />\n  <Route path=\"/books/new\" element={<NewBook />} />\n</Routes>"
+      },
+      {
+       "t": "text",
+       "v": "Scenario 3:"
+      },
+      {
+       "t": "text",
+       "v": "If any non-existing path is entered in brower, how to show not found page.."
+      },
+      {
+       "t": "text",
+       "v": "Answer is you acn use path=* like below. Bcoz if nothing matches it will be honoured"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Route path=\"*\" element={<NotFound />} />"
+      }
+     ],
+     "id": "dynamic-routes"
+    },
+    {
+     "title": "Nested Routes:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "All subroutes under /books can be written like this"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Route path=\"/books\">\n  <Route path=\":id\" element={<Book />} />"
+      },
+      {
+       "t": "text",
+       "v": "In above scenario,what if you want to take to books component if url is just /books, then this is how you can define… in place of path type index, thats it"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Route path=\"/books\">\n  <Route index element={<BookList />} />\n  <Route path=\":id\" element={<Book />} />\n  <Route path=\"new\" element={<NewBook />} />\n</Route>"
+      },
+      {
+       "t": "text",
+       "v": "Better explanation:"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Route path=\"/\" element={<Home />} />\n<Route path=\"/books\">\n  <Route index element={<BookList />} />\n  <Route path=\":id\" element={<Book />} />\n  <Route path=\"new\" element={<NewBook />} />\n</Route>\n<Route path=\"*\" element={<NotFound />} />"
+      },
+      {
+       "t": "text",
+       "v": "Initially assume that index line is not there, so you will be able to render routes /id /new.. But what if user enters /books and you want to render BookList component.. This is where index came into picture"
+      },
+      {
+       "t": "text",
+       "v": "Now read scenario 1"
+      },
+      {
+       "t": "text",
+       "v": "Scenario 1: (this scenario focussed on have BookLayout Component line"
+      },
+      {
+       "t": "text",
+       "v": ")"
+      },
+      {
+       "t": "text",
+       "v": "Lets say there’s a component, and you want to render that component in all other components. You can either, copy paste common code into each component, or you can create one single component and import it wherever needed. Or you can do below"
+      },
+      {
+       "t": "text",
+       "v": "Create a separate file with common code in there,   so you wrap this component in root route of that path….And when you hit the path this component also gets loaded along with the actual individual path code like in this case it can be <Book> <NewBook> code….So mandatorily BookLayout will be loaded everytime and in addition to that nested routes also get loaded"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "</nav>\n<Routes>\n  <Route path=\"/\" element={<Home />} />\n  <Route path=\"/books\" element={<BookLayout />}>\n    <Route index element={<BookList />} />\n    <Route path=\":id\" element={<Book />} />\n    <Route path=\"new\" element={<NewBook />} />\n  </Route>\n  <Route path=\"*\" element={<NotFound />} />"
+      },
+      {
+       "t": "text",
+       "v": "One interesting thing is, you will only see that common component being loaded but not those <Book> <NewBook>  code bcoz <Outlet/> is missing… so it common component add <Outlet/>"
+      },
+      {
+       "t": "text",
+       "v": "Common component"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "return (\n  <>\n    <Link to=\"/books/1\">Book 1</Link>\n    <br />\n    <Link to=\"/books/2\">Book 2</Link>\n    <br />\n    <Link to=\"/books/new\">New Book</Link>\n    <Outlet />\n  </>"
+      },
+      {
+       "t": "text",
+       "v": "IF YOU ADD not added <outlet> tag BookList wouldnt have been displayed."
+      },
+      {
+       "t": "text",
+       "v": "So basically outlet will, forward whatever path is present after loading the element =<BookLayout>"
+      },
+      {
+       "t": "text",
+       "v": "In interview terms, outlet component will render our current route"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Browser at localhost:3000/books showing a nav list with Home and Books links, below it links Book 1, Book 2, New Book, and a large heading BookList]"
+      },
+      {
+       "t": "text",
+       "v": "Outlet tag will take context, and you can pass object in it, and it will be forwarded to whatever components its going to"
+      },
+      {
+       "t": "text",
+       "v": "Send it like:"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<Link to=\"/books/new\">New Book</Link>\n<Outlet context={{ hello: \"World\" }} />"
+      },
+      {
+       "t": "text",
+       "v": "Receive it like:"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "export function Book() {\n  const { id } = useParams()\n  const obj = useOutletContext()\n  return <h1>Book {id}</h1>\n}"
+      }
+     ],
+     "id": "nested-routes"
+    },
+    {
+     "title": "useRoutes:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Alternative to <Routes>"
+      },
+      {
+       "t": "text",
+       "v": "Its alternative to using jsx <Routes>... with useRoutes you define using javascript. So no need to learn syntax but it will look like below"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "    path: \"/\",\n    element: <NavLayout />,\n    children: [\n      {\n        index: true,\n        element: <Home />\n      },\n      {\n        path: \"about\",\n        element: <About />,\n      },\n      {\n        path: \"contact\",\n        element: <Contact />,\n      }\n    ],\n  }\n]);"
+      }
+     ],
+     "id": "useroutes"
+    },
+    {
+     "title": "Link Component",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "In above we talked about Link component, which is like below"
+      },
+      {
+       "t": "text",
+       "v": "<Link to=”/productList”>Product List</Link>"
+      },
+      {
+       "t": "text",
+       "v": "But it has more properties that just that for example"
+      },
+      {
+       "t": "text",
+       "v": "<Link to=”/” replace>Book3</Link>"
+      },
+      {
+       "t": "text",
+       "v": "What replace does is:"
+      },
+      {
+       "t": "text",
+       "v": "Lets say, you clicked on Book 1, next on Book 2 and then on Book3. Observe above Book3 has a replace property. So when you click on Book3, its going to replace the previous path which in this case is “Book2” with Book3….so now when you hit back button, you go to Book1…bcoz Book3 has replaced Book2"
+      },
+      {
+       "t": "text",
+       "v": "So in history, it will be like Book1, Book3"
+      },
+      {
+       "t": "text",
+       "v": "Explained in this video at 31:00 minutes,"
+      },
+      {
+       "t": "text",
+       "v": "Used in cases where when user clicks back button after logging in, you dont want to again take them to login page in history,, so what you do is you replace that login page with current page…"
+      },
+      {
+       "t": "text",
+       "v": "What reloadDocument does is:"
+      },
+      {
+       "t": "text",
+       "v": "To which ever page this property is there, it will reload the entire page meaning browser will refresh..generally react doesnt refresh while determining routes but with reloadDocument it does"
+      },
+      {
+       "t": "text",
+       "v": "What state does:"
+      },
+      {
+       "t": "text",
+       "v": "It allows to send state from one Link to other Link, but this data will not showup in url bar."
+      }
+     ],
+     "id": "link-component"
+    },
+    {
+     "title": "NavLink Component",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It similar to Link but has extra properties like, className, style and children…the function accepts a function"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "<NavLink\n  style={({ isActive }) => {\n    return isActive ? { color: \"red\" } : {}\n  }}\n  to=\"/\""
+      },
+      {
+       "t": "text",
+       "v": "You can set classNames also"
+      }
+     ],
+     "id": "navlink-component"
+    },
+    {
+     "title": "Navigate Component:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Automatically redirect someone when they land on error page"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "export function NotFound() {\n  return <Navigate to=\"/\" />\n}"
+      }
+     ],
+     "id": "navigate-component"
+    },
+    {
+     "title": "useNavigate Hook",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "But most of the times, you want to navigate user like, when they done logging in, you want to redirect to dashboard page, you can use useNavigate Hook"
+      },
+      {
+       "t": "text",
+       "v": "The same above screenshot, I implemented using useNavigate hook"
+      },
+      {
+       "t": "code",
+       "lang": "jsx",
+       "v": "export function NotFound() {\n  const navigate = useNavigate()\n\n  useEffect(() => {\n    setTimeout(() => {\n      navigate(\"/\")\n    }, 1000)\n  }, [])\n  return <h1>NotFound</h1>\n}"
+      },
+      {
+       "t": "text",
+       "v": "navigate(-1) => will go back 1 page"
+      },
+      {
+       "t": "text",
+       "v": "navigate(-2) => will go back 2 page"
+      }
+     ],
+     "id": "usenavigate-hook"
+    },
+    {
+     "title": "Search Params:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "To read params from url…."
+      },
+      {
+       "t": "text",
+       "v": "const [searchParams, setSearchParams] = useSearchParams();"
+      },
+      {
+       "t": "text",
+       "v": "searchParams to get params"
+      },
+      {
+       "t": "text",
+       "v": "setSearchParams to update Params"
+      },
+      {
+       "t": "text",
+       "v": "You can use for three purposes"
+      },
+      {
+       "t": "text",
+       "v": "To Read Params: To read query strings from url using like searchParams.get('filter') which will give value of filter query"
+      },
+      {
+       "t": "text",
+       "v": "Update Params: you can even update params without reloading the age"
+      }
+     ],
+     "id": "search-params"
+    },
+    {
+     "title": "What is React Router?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "What it is used for?"
+      },
+      {
+       "t": "text",
+       "v": "What its key feature?"
+      },
+      {
+       "t": "text",
+       "v": "What component we use while implementing"
+      },
+      {
+       "t": "text",
+       "v": "What features it has"
+      },
+      {
+       "t": "text",
+       "v": "Different types of React Routers"
+      },
+      {
+       "t": "text",
+       "v": "Most common used router (browser router)"
+      },
+      {
+       "t": "text",
+       "v": "Hash, Memory Router, Native router"
+      },
+      {
+       "t": "text",
+       "v": "How do you declare Routes?"
+      },
+      {
+       "t": "text",
+       "v": "We use the <Route> Component which is basically building block of whole React."
+      },
+      {
+       "t": "text",
+       "v": "Where do you wrap the Routes"
+      },
+      {
+       "t": "text",
+       "v": "Whats syntax, what it takes"
+      },
+      {
+       "t": "text",
+       "v": "How To handle 404 page?"
+      },
+      {
+       "t": "text",
+       "v": "Have route with path=/*. That way if none of above matches, it goes to 404 page"
+      },
+      {
+       "t": "text",
+       "v": "Or define no path at all"
+      }
+     ],
+     "id": "what-is-react-router"
+    },
+    {
+     "title": "Link and NavLink",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "They both are used to perform navigation in application"
+      },
+      {
+       "t": "text",
+       "v": "Link is fundamental thing which we used for implementing simple navigation in application. It renders a anchor tag and href attribute to navigate to specified route when clicked"
+      },
+      {
+       "t": "text",
+       "v": "NavLink is bit advanced than Link with additional properties or capabitliesy, you can maange the classList, set styling"
+      },
+      {
+       "t": "text",
+       "v": "Programmatically route"
+      },
+      {
+       "t": "text",
+       "v": "Programmatically navigating in React Router involves using the history object provided by the router to manipulate the browser’s history stack and navigate to different URLs programmatically. You can access the history object using hooks like useHistory() or by wrapping your component with withRouter() higher-order component. Once you have access to the history object, you can use methods like push() , replace() , or goBack() to navigate forward, replace the current URL, or go back to the previous URL in the history stack."
+      }
+     ],
+     "id": "link-and-navlink"
+    },
+    {
+     "title": "Why Switch Router: (in v5 its called switch, in v6 called as <Routes>)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Basically if multiple routes match, multiple routes are rendered in reaect."
+      },
+      {
+       "t": "text",
+       "v": "For example:"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/dept”>"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/list”>"
+      },
+      {
+       "t": "text",
+       "v": "If I enter localhost:414/ => it will render both the dept and list components. Which I do not want…. So I use switch here to tel react that, what ever route that match first with the url, go with only that route… so when it finds the first route which is matching the url it will ignore checking the other routes…."
+      },
+      {
+       "t": "text",
+       "v": "So simply you will wrap  like below"
+      },
+      {
+       "t": "text",
+       "v": "<switch>"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/dept”>"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/list”>"
+      },
+      {
+       "t": "text",
+       "v": "</Switch>"
+      }
+     ],
+     "id": "why-switch-router-in-v5-its-called-switch-in-v6-called-as-ro"
+    },
+    {
+     "title": "Then why EXACT:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "React about SWITCH first"
+      },
+      {
+       "t": "text",
+       "v": "What exact property does is, it will render the Route which exactly matches the url path…"
+      },
+      {
+       "t": "text",
+       "v": "For example, lets say we have below routes"
+      },
+      {
+       "t": "text",
+       "v": "<route path = “/”"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/dept”>"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/list”>"
+      },
+      {
+       "t": "text",
+       "v": "Now if I enter localhost:343/ => it will render all three routes bcox all three routes have / in them…But I want first route to be render if url is only “/”...so what I do? I add exact like this"
+      },
+      {
+       "t": "text",
+       "v": "<route exact path = “/”"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/dept”>"
+      },
+      {
+       "t": "text",
+       "v": "<Route path=”/list”>"
+      },
+      {
+       "t": "text",
+       "v": "So first route will be rendered only if url has / in it"
+      }
+     ],
+     "id": "then-why-exact"
+    },
+    {
+     "title": "How do you handle Query Params?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "How do you handle means, we try to get the params, parse and use it in components."
+      },
+      {
+       "t": "text",
+       "v": "There are multiple ways to do it.."
+      },
+      {
+       "t": "text",
+       "v": "You can use “useLocation” hook"
+      },
+      {
+       "t": "text",
+       "v": "You can use “useSearchParams” hook"
+      },
+      {
+       "t": "text",
+       "v": "useParams hook"
+      }
+     ],
+     "id": "how-do-you-handle-query-params"
+    },
+    {
+     "title": "Summary:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "useLocation: Access the entire URL, including the query string, and parse it manually."
+      },
+      {
+       "t": "text",
+       "v": "useSearchParams (React Router v6): Provides a straightforward API for getting and setting query parameters."
+      },
+      {
+       "t": "text",
+       "v": "useParams: For handling dynamic path parameters, not query parameters. (:id path params)"
+      }
+     ],
+     "id": "summary"
+    },
+    {
+     "title": "Difference between useLocation and useSearchParams",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Use useLocation when you need to access the entire URL location object, not just the query parameters. This might include accessing the pathname, hash, or state in addition to the query string."
+      },
+      {
+       "t": "text",
+       "v": "you would typically use useLocation to access the query string (location.search) and then manually parse it using URLSearchParams."
+      },
+      {
+       "t": "text",
+       "v": "Use useSearchParams when you only need to work with query parameters. This hook is specifically designed for managing query strings and offers an easier API for getting, setting, and updating query parameters."
+      },
+      {
+       "t": "text",
+       "v": "const [searchParams, setSearchParams] = useSearchParams();"
+      },
+      {
+       "t": "text",
+       "v": "It has easy apis to be able to get and update query params."
+      }
+     ],
+     "id": "difference-between-uselocation-and-usesearchparams"
+    },
+    {
+     "title": "<Outlet>",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "For in detail explanation refer to nested routes"
+      },
+      {
+       "t": "text",
+       "v": "The <Outlet> component in React Router is used as a placeholder within a parent route component to render child routes. It allows you to define nested routes and determines where in the parent component the child route's content should be displayed."
+      },
+      {
+       "t": "text",
+       "v": "LAzy Loading"
+      },
+      {
+       "t": "text",
+       "v": "Talk components not being loaded first"
+      },
+      {
+       "t": "text",
+       "v": "Images using intersection observer"
+      },
+      {
+       "t": "text",
+       "v": "Importing libariries"
+      },
+      {
+       "t": "text",
+       "v": "Additional ways to pass props to Routes"
+      },
+      {
+       "t": "text",
+       "v": "Like the params :id, the component can use useParams Hook to get those"
+      },
+      {
+       "t": "text",
+       "v": "Use render() instead of element…in render you can define a function and pass additional props to components"
+      },
+      {
+       "t": "text",
+       "v": "Use children, lets say they are 4 routes, and only one route matches the url.. Since the other 3 routes didnnt match , you can put children function and pass props to target component"
+      }
+     ],
+     "id": "outlet"
+    },
+    {
+     "title": "Non- Technical",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Questions you can ask on first day:"
+      },
+      {
+       "t": "text",
+       "v": "Should we fill in hours on timesheet end of week? Or am I even supposed to fill in hours or is it not needed…If they say yes, you can ask them how to fill in hours on that timely portal…. But most probably you will know how to fill hours in your orientation session"
+      }
+     ],
+     "id": "non-technical"
+    },
+    {
+     "title": "Technical",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "React latest version: 18"
+      },
+      {
+       "t": "text",
+       "v": "If you have"
+      },
+      {
+       "t": "text",
+       "v": "Questions you can ask on first day:"
+      },
+      {
+       "t": "text",
+       "v": "What’s the stack of tools we use, for example any styling libraries, build tools etc."
+      },
+      {
+       "t": "text",
+       "v": "Is there any documentation I can read in the meanwhile until I get access to keep myself busy…So what tool do we use for documentation?"
+      },
+      {
+       "t": "text",
+       "v": "If I have to download any tools like VsCode, gitBash can I download from the internet or or should I get any approval"
+      },
+      {
+       "t": "text",
+       "v": "Is it a complete new project that I am going to work from scratch or did the project already start? Did the project start? Etc etc…"
+      },
+      {
+       "t": "text",
+       "v": "For self: if its already started, most probably they will have git project created and code available, so you can ask for project access…"
+      }
+     ],
+     "id": "technical"
+    },
+    {
+     "title": "Component libraries:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "External libraries where forms, buttons etc etc are provided by out of box so with less coding, we can achieve desired results"
+      }
+     ],
+     "id": "component-libraries"
+    },
+    {
+     "title": "Global State Management:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "If there is any state variable, that will be used by lot of functional components, we store it in redux, that way any component can update and get the value whenever needed.."
+      },
+      {
+       "t": "text",
+       "v": "If there is no Redux, we should use useContext or prop drilling which is very confusing to a reader."
+      }
+     ],
+     "id": "global-state-management"
+    },
+    {
+     "title": "Server state management",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "To make calls to backend, like POST, GET, DELETE etc etc, we use react-query."
+      }
+     ],
+     "id": "server-state-management"
+    },
+    {
+     "title": "Routing:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "To redirect users to different pages/components"
+      }
+     ],
+     "id": "routing"
+    },
+    {
+     "title": "Build Tools:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "These are used to compile, build and optimize javascript code. More efficient the tool is, the better it is"
+      },
+      {
+       "t": "text",
+       "v": "The options available are: Webpack and Vite"
+      },
+      {
+       "t": "text",
+       "v": "Tell you have used both…"
+      },
+      {
+       "t": "text",
+       "v": "When you run npx run create react-app, it sets up basic code right, at that time by default it is using webpack as build tool."
+      },
+      {
+       "t": "text",
+       "v": "But most of us use Vite as its more effective.."
+      }
+     ],
+     "id": "build-tools"
+    },
+    {
+     "title": "Styling:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Tailwind Css: you just copy the classNames from their website and put it inline html"
+      },
+      {
+       "t": "text",
+       "v": "<div class=\"flex direction-row\">; this in CSS means you have set display to flex and flex-direction to row…."
+      },
+      {
+       "t": "text",
+       "v": "So when you use styling libraries you dont have to maintain css files.."
+      }
+     ],
+     "id": "styling"
+    },
+    {
+     "title": "CSS preprocessors:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Sass and less"
+      },
+      {
+       "t": "text",
+       "v": "Like for declaring variables, OR"
+      },
+      {
+       "t": "text",
+       "v": "if there is a block of code in css that is being repeated. Then you can put that block of code in a mixin and refer to the mixin name. That way you can just use the mixin name like a variable"
+      },
+      {
+       "t": "text",
+       "v": "What services in AWS to deploy to AWS?"
+      },
+      {
+       "t": "text",
+       "v": "The only services that we use to deploy frontend to aws are CloudFront and s3."
+      },
+      {
+       "t": "text",
+       "v": "Cloudfront in simple words is nothing but a server which will have the domain name."
+      },
+      {
+       "t": "text",
+       "v": "S3 is a place where the build files are copied."
+      },
+      {
+       "t": "text",
+       "v": "When user enter something like “” in browser, the request will go to Cloudfront where I attached  as domain, and all requests coming to this cloudfront will be directed to s3 bucket from where the content is displayed on browser.."
+      },
+      {
+       "t": "text",
+       "v": "Every cloudfront will have its own s3 bucket."
+      },
+      {
+       "t": "text",
+       "v": "Every domain url will have its own cloudfront server."
+      },
+      {
+       "t": "text",
+       "v": "So once cloudfront is setup, you just have to keep deploying code to s3 bucket as and when you have new features or bug fixes"
+      },
+      {
+       "t": "text",
+       "v": "Ignore Route53 in below picture."
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: AWS architecture diagram showing request flow left to right: User -> Route 53 -> CloudFront -> S3 Bucket, with arrows connecting each service icon.]"
+      }
+     ],
+     "id": "css-preprocessors"
+    },
+    {
+     "title": "For testing Framework:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "For unit testing, which means to simply test javascript functions we  use JEST"
+      },
+      {
+       "t": "text",
+       "v": "For functional component testing like to test everything including html css as whole page testing, we use react testing library"
+      }
+     ],
+     "id": "for-testing-framework"
+    },
+    {
+     "title": "For troubleshooting:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "React dev tools is nothing but a browser extension, which you can enable in any browser…"
+      },
+      {
+       "t": "text",
+       "v": "It just gives you some additional insights as to how you can troubleshoot an application. For example you can check whats the state variable value is, what was the initial value, to what it was changed later etc etc..Instead of using console.log() and printing to developer console, you can use this professionally"
+      }
+     ],
+     "id": "for-troubleshooting"
+    },
+    {
+     "title": "For Wires/Mockups:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Figma is the tool where UX designers develop the design and share with frontend developers, the frontend developers will refer to this wires to develop the application"
+      },
+      {
+       "t": "text",
+       "v": "There are 3 types of wires we have, I mean a ux designer can explain you the designs with 3 different types of wires"
+      },
+      {
+       "t": "text",
+       "v": "Main point:"
+      },
+      {
+       "t": "text",
+       "v": "Low-fi wires: just basic layout of the designs (not useful for developers to begin coding, its just for discussion or to get some understanding of how the application will look in the end)"
+      },
+      {
+       "t": "text",
+       "v": "Mid-fi wires: with screen designs but not exactly the way we wanted (still not useful for developers to develop the application, but better than low fi, will give more understanding of application)"
+      },
+      {
+       "t": "text",
+       "v": "High-fi wires: this is what we want, it will have the final desired application look, a frontend developer should always look at high fi wires for precision.."
+      },
+      {
+       "t": "text",
+       "v": "Main point: developers need high-fi wires. UX designers will hand-off design to developers after high-fi wires are completed."
+      }
+     ],
+     "id": "for-wires-mockups"
+    },
+    {
+     "title": "Accessibility Testing:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It means to  make sure colors are appropriate for color blindness people, ability to navigate through a website without using a mouse, even a dead person should be able to use (by using screen readers)"
+      },
+      {
+       "t": "text",
+       "v": "W3c is the company which sets rules for accessibility"
+      },
+      {
+       "t": "text",
+       "v": "You can use “lighthouse” in developer console, to get a report of accessibility"
+      },
+      {
+       "t": "text",
+       "v": "___________________________________"
+      }
+     ],
+     "id": "accessibility-testing"
+    },
+    {
+     "title": "REMIND ME LATER IN THE DAY::",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "to explain about browser dev tools and browser developer tools"
+      }
+     ],
+     "id": "remind-me-later-in-the-day"
+    }
+   ]
+  },
+  {
+   "id": "js",
+   "label": "JavaScript",
+   "topics": [
+    {
+     "title": "This keyword:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "this refers to the object that owns the function. Below code, this belong to the Person(Object), which owns the function (greet)"
+      },
+      {
+       "t": "text",
+       "v": "const person = {"
+      },
+      {
+       "t": "text",
+       "v": "name: \"Ram\","
+      },
+      {
+       "t": "text",
+       "v": "greet: function() {"
+      },
+      {
+       "t": "text",
+       "v": "console.log(this.name);"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "text",
+       "v": "};"
+      },
+      {
+       "t": "text",
+       "v": "person.greet(); // Ram"
+      }
+     ],
+     "id": "this-keyword"
+    },
+    {
+     "title": "console.log(this); -> window (in browser)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "in constructor -> this refers to newly created instance"
+      }
+     ],
+     "id": "console-log-this-window-in-browser"
+    },
+    {
+     "title": "Deep vs Shallow Copy:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Deep copy will create new object without references: so if you change any property in second object  it doesnt impact first object"
+      },
+      {
+       "t": "text",
+       "v": "Shalow copy: you copy the reference to the object, so wherever you change the property, it will impact the object."
+      },
+      {
+       "t": "text",
+       "v": "Deep copy:  JSon.parse(JSON.stringify(obj1)) // stringify and parse,"
+      },
+      {
+       "t": "text",
+       "v": "Shallow copy: use … operators"
+      },
+      {
+       "t": "text",
+       "v": "Caveat:"
+      },
+      {
+       "t": "text",
+       "v": "If object is not nested, you can use rest operators for deep copying. If its nested object, it will always to shallow copy"
+      }
+     ],
+     "id": "deep-vs-shallow-copy"
+    },
+    {
+     "title": "is javascript dynamically typed or statically type:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Dynamically typed bcoz for same variable let, you can assign number, string, boolean. JS will change internally"
+      },
+      {
+       "t": "text",
+       "v": "\"Typing\" = how a language handles the type of a value (string, number, boolean, etc.) — specifically whether you declare types and when they're checked."
+      },
+      {
+       "t": "text",
+       "v": "The two kinds"
+      },
+      {
+       "t": "text",
+       "v": "Dynamic typing (JavaScript) — you don't declare types; they're figured out while the code runs, and can change:"
+      },
+      {
+       "t": "text",
+       "v": "let x = 5;        // x is a number now"
+      },
+      {
+       "t": "text",
+       "v": "x = \"hello\";      // now it's a string — allowed"
+      },
+      {
+       "t": "text",
+       "v": "Static typing (TypeScript, Java) — you declare the type, and it's checked before running (at compile time); it can't change:"
+      },
+      {
+       "t": "text",
+       "v": "let x: number = 5;   // x is locked as a number"
+      },
+      {
+       "t": "text",
+       "v": "x = \"hello\";         // ❌ error — caught before running"
+      },
+      {
+       "t": "text",
+       "v": "Simple breakdown"
+      },
+      {
+       "t": "text",
+       "v": "┌────────────────┬──────────────────────────────────────────────────────────┐"
+      },
+      {
+       "t": "text",
+       "v": "│      Term      │                         Meaning                          │"
+      },
+      {
+       "t": "text",
+       "v": "├────────────────┼──────────────────────────────────────────────────────────┤"
+      },
+      {
+       "t": "text",
+       "v": "│ Typing         │ How the language deals with value types                  │"
+      },
+      {
+       "t": "text",
+       "v": "├────────────────┼──────────────────────────────────────────────────────────┤"
+      },
+      {
+       "t": "text",
+       "v": "│ Dynamic typing │ No type declared, checked at runtime, can change (JS)    │"
+      },
+      {
+       "t": "text",
+       "v": "├────────────────┼──────────────────────────────────────────────────────────┤"
+      },
+      {
+       "t": "text",
+       "v": "│ Static typing  │ Type declared, checked at compile time, fixed (TS, Java) │"
+      },
+      {
+       "t": "text",
+       "v": "└────────────────┴──────────────────────────────────────────────────────────┘"
+      }
+     ],
+     "id": "is-javascript-dynamically-typed-or-statically-type"
+    },
+    {
+     "title": "Params vs arguments",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Parameter is the variable in the declaration of the function."
+      },
+      {
+       "t": "text",
+       "v": "Argument is the actual value of this variable that gets passed to the function."
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function sum(a,b) {//parameter\n    return a+b;\n}\n\nsum(2,3);//arguments\n"
+      }
+     ],
+     "id": "params-vs-arguments"
+    },
+    {
+     "title": "Ternary vs if else",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Ternary is a expression, if else is statement"
+      },
+      {
+       "t": "text",
+       "v": "Use ternary for variable storing"
+      }
+     ],
+     "id": "ternary-vs-if-else"
+    },
+    {
+     "title": "Event Bubbling And Capturing:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "These are event progration techniques in which JS moves"
+      },
+      {
+       "t": "text",
+       "v": "How to solve output based interview questions: When a div is clicked, checked what all areas the user clicked on. If you see any div with capture: true…start with that div and look for capturing logic….then bubble"
+      },
+      {
+       "t": "text",
+       "v": "Basically, first it will capture and then it will bubble"
+      },
+      {
+       "t": "text",
+       "v": "Event.propagation"
+      },
+      {
+       "t": "text",
+       "v": "Once: true"
+      },
+      {
+       "t": "text",
+       "v": "stopPropagation"
+      },
+      {
+       "t": "text",
+       "v": "removeEventListener"
+      },
+      {
+       "t": "text",
+       "v": "Set capture = true, to do event capturing. By default, it will be false so bubbling happens"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "const child = document.querySelector(\".child\")\n\ngrandparent.addEventListener(\"click\", e => {\n  console.log(\"Grandparent 1\")\n}, { capture: true })"
+      }
+     ],
+     "id": "event-bubbling-and-capturing"
+    },
+    {
+     "title": "Promises and how they work",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Promises is a mechanism which is used asynchronous operation that represents the eventual completion or failure of a asynchronous executioin"
+      },
+      {
+       "t": "text",
+       "v": "it will produce a single value some time in the future. If the promise is successful, it will produce a resolved value, but if something goes wrong then it will produce a reason why the promise failed."
+      },
+      {
+       "t": "text",
+       "v": "It allows you to handle asynchronous operations in a more organized and readable way compared to traditional callback functions."
+      },
+      {
+       "t": "text",
+       "v": "Promises are meant to replace callbacks"
+      },
+      {
+       "t": "text",
+       "v": "Promises can include Then, catch, finally"
+      },
+      {
+       "t": "text",
+       "v": "promise.all([a,b,c]) output waits for all to complete"
+      },
+      {
+       "t": "text",
+       "v": "promise.race([a,b,c]) // output :- whichever is done first"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Promise code example with a numbered step-by-step explanation of how the executor, resolve/reject, .then and .catch, and the microtask queue work]"
+      }
+     ],
+     "id": "promises-and-how-they-work"
+    },
+    {
+     "title": "Callbacks",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Callback is a function that is passed as an argument to another function"
+      },
+      {
+       "t": "text",
+       "v": "Any function that is passed as an argument to another function so that it can be executed in that other function is called as a callback function"
+      },
+      {
+       "t": "text",
+       "v": "One of the drawbacks of the callback pattern is in order to handle sequential async behavior this often resorts in a code which becomes harder to read, debug, and maintain."
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "// callback = a function that is passed as an argument\n//             to another function.\n\nhello(goodbye);\n\nfunction hello(callback){\n    console.log(\"Hello!\");\n    callback();\n}\n\nfunction goodbye(){\n    console.log(\"Goodbye!\");\n}"
+      }
+     ],
+     "id": "callbacks"
+    },
+    {
+     "title": "Why Promises over Callbacks",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "When dealing with multiple asyncthonous operation, you fall in that trap of nested complications, which is generally called as callback hell"
+      },
+      {
+       "t": "text",
+       "v": "Code complicated, not readable"
+      },
+      {
+       "t": "text",
+       "v": "Handling errors is bit tough, whereas in promises you can use catch block"
+      },
+      {
+       "t": "text",
+       "v": "Callback Hell:"
+      },
+      {
+       "t": "text",
+       "v": "In programming, callback hell refers to an ineffective way of writing asynchronous code and overusing callbacks. It takes place when you nest functions and create too many levels of nesting. This makes it harder to control access to the specific function and it becomes harder to debug the issues."
+      },
+      {
+       "t": "text",
+       "v": "Nesting means placing one function in another, placing the third function in the second, then the fourth in the third function, and so on. By placing the callback function in another callback, then again another callback in another callback, in more complex applications, callback logic might get too messy! This type of nesting visually looks like a pyramid which is why callback hell is also called a pyramid of doom."
+      }
+     ],
+     "id": "why-promises-over-callbacks"
+    },
+    {
+     "title": "Async, await",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Async and await are just syntactical sugar wrapped around promises to make it easier to work with."
+      },
+      {
+       "t": "text",
+       "v": "It's a way to write asynchronous programming in a synchronous manner."
+      },
+      {
+       "t": "text",
+       "v": "It just makes it easier to write instead of writing nested blocks of then, catch. (look at commented code)"
+      },
+      {
+       "t": "text",
+       "v": "You can use try catch for error handling."
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "// makeRequest('Facebook').then(response => {\n//   console.log('Response Received')\n//   return processRequest(response)\n// }).then(processedResponse => {\n//   console.log(processedResponse)\n// }).catch(err => {\n//   console.log(err)\n// })\n\nasync function doWork() {\n  try {\n    const response = await makeRequest('Facebook')\n    console.log('Response Received')\n    const processedResponse = await processRequest(response)\n    console.log(processedResponse)\n  } catch (err) {\n    console.log(err)\n  }\n}\ndoWork()"
+      },
+      {
+       "t": "text",
+       "v": "Takeaway:"
+      },
+      {
+       "t": "text",
+       "v": "Async before a function declaration will return a promise"
+      },
+      {
+       "t": "text",
+       "v": "The await keyword makes the function pause the execution and wait for a resolved promise before it continues:"
+      }
+     ],
+     "id": "async-await"
+    },
+    {
+     "title": "Event Loop",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "In short and crispy way summarizing below screenshot:"
+      },
+      {
+       "t": "text",
+       "v": "Functions, statements to call stack"
+      },
+      {
+       "t": "text",
+       "v": "What happens to synchronous code"
+      },
+      {
+       "t": "text",
+       "v": "What happens to asynchronous code (handling, completing)"
+      },
+      {
+       "t": "text",
+       "v": "Pushed callback to callback queue"
+      },
+      {
+       "t": "text",
+       "v": "If nothing in calstack, take from callbackqueue and execute callback and keeps on doing that"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Article text titled 'How the Event Loop Works' with a numbered list of 7 steps describing call stack, synchronous code, async code, callback queue, and event loop processing]"
+      },
+      {
+       "t": "text",
+       "v": "Components of JS Environment"
+      },
+      {
+       "t": "text",
+       "v": "Call Stack: This is where the JavaScript engine keeps track of function calls. When a script calls a function, the engine adds it to the call stack and starts executing it. If this function calls another one, the engine places the new function on top of the call stack and executes it. This process continues until the stack is empty."
+      },
+      {
+       "t": "text",
+       "v": "Heap: This is where objects are stored. It's a large, mostly unstructured region of memory."
+      },
+      {
+       "t": "text",
+       "v": "Web APIs: These are provided by the browser (in the case of browser environments) or other environments (like Node.js). allow JavaScript to interact with external resources and perform operations asynchronously."
+      },
+      {
+       "t": "text",
+       "v": "Callback Queue(MacroTask queue): When asynchronous Web API operations complete, the callbacks for these operations are added to the callback queue. If the call stack is empty, the event loop will take the first event from the queue and push it to the call stack to be executed."
+      },
+      {
+       "t": "text",
+       "v": "event Loop: The event loop continuously checks the call stack and determines if there's any work to be done. If the call stack is empty and there are callbacks in the callback queue, the event loop pushes the first callback from the queue to the call stack to be executed."
+      },
+      {
+       "t": "text",
+       "v": "Macro task less priority over micro tasks. Promise handlers and mutation observers have more priority"
+      },
+      {
+       "t": "text",
+       "v": "Task queue = callback queue"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Article text section '4. Microtask Queue' explaining the Job/Promise Queue and its priority over the callback queue]"
+      },
+      {
+       "t": "text",
+       "v": "The microtask queue contains the callbacks of operations that are considered more urgent or important, such as promises and mutation observers APIs."
+      },
+      {
+       "t": "text",
+       "v": "The macrotask queue contains the callbacks of operations that are less urgent such as timers, I/O events, and user interface events."
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Two-box diagram comparing Micro-Task (Priority) items (Promise callbacks, Mutation Observer, process.nextTick, queueMicrotask, await) vs Macro-Task items (setTimeout/setInterval, DOM rendering, I/O, network requests, event handlers)]"
+      }
+     ],
+     "id": "event-loop"
+    },
+    {
+     "title": "Hoisting",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their respective scopes before the code is executed."
+      },
+      {
+       "t": "text",
+       "v": "Let and var wil be hoisted. But var will be undefined..but"
+      },
+      {
+       "t": "text",
+       "v": "Var = undefined"
+      },
+      {
+       "t": "text",
+       "v": "for let  and constnat it will be, cant be reference before initialized"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Chat/explanation about the temporal dead zone being a good thing, comparing var's silent undefined vs let/const throwing ReferenceError, with small code snippets]"
+      }
+     ],
+     "id": "hoisting"
+    },
+    {
+     "title": "Closures",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "A closure in JavaScript is a function that has access to variables in its parent scope, even after the parent function has returned.’"
+      },
+      {
+       "t": "text",
+       "v": "Closures are created when a function is defined inside another function, and the inner function retains access to the variables in the outer function's scope"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function outerFunction(outerVariable) {\n  return function innerFunction(innerVariable) {\n    console.log('Outer Variable: ' + outerVariable)\n    console.log('Inner Variable: ' + innerVariable)\n  }\n}\n\nconst newFunction = outerFunction('outside')\nnewFunction()"
+      }
+     ],
+     "id": "closures"
+    },
+    {
+     "title": "prototype, prototype Chaining, prototype Inheritance, _proto_, inheritance, constructor property",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "."
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Prototype chain diagram showing Employee function (prototype) linked to Employee's Prototype (__proto__) linked to Object's Prototype, and emp object's __proto__ pointing to Employee's Prototype]"
+      }
+     ],
+     "id": "prototype-prototype-chaining-prototype-inheritance-proto-inh"
+    },
+    {
+     "title": "Arrow vs normal functions?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Main difference is:"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "const user = {\n  name: \"Ram\",\n  greet: function () {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // Ram\n\n// ---\n\nconst user = {\n  name: \"Ram\",\n  greet: () => {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // undefined (typically)"
+      },
+      {
+       "t": "text",
+       "v": "Arrow functions are introduced in es6, simple and easy way to define functions"
+      },
+      {
+       "t": "text",
+       "v": "Arguments: arguments are accessible in normal functions even if function doesnt accept any params"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function regFunction() {\n  console.log(arguments);\n};\n\nconst arrowFunction = () => {\n  console.log(arguments);\n};\n\nregFunction('hi', 5, true);\n// arrowFunction('hi', 5, true);"
+      },
+      {
+       "t": "text",
+       "v": "Return keyword is needed in regular function, in arrow function if no curly braces it automatically returns"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function regFunction(x) {\n  return x;\n};\n\nconst arrowFunction = (x) => x;\n\nconsole.log(regFunction(2))\nconsole.log(arrowFunction(5))"
+      },
+      {
+       "t": "text",
+       "v": "“this” binding works only in regular function "
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "let myObj = {\n  x: 2,\n  regularFunc() {\n    console.log(this.x);\n  },\n  arrowFunc: () => console.log(this.x),\n}\n\nmyObj.regularFunc();\n// myObj.arrowFunc();"
+      }
+     ],
+     "id": "arrow-vs-normal-functions"
+    },
+    {
+     "title": "Spread vs rest operator",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "In JavaScript, the spread operator, represented by three dots (...), allows you to expand an iterable object, such as an array, string, or object literal, into its individual elements."
+      },
+      {
+       "t": "text",
+       "v": "In JavaScript, the rest operator, represented by three dots (...), allows a function to accept an indefinite number of arguments as an array."
+      },
+      {
+       "t": "text",
+       "v": "__Proto__ vs Prototype"
+      }
+     ],
+     "id": "spread-vs-rest-operator"
+    },
+    {
+     "title": "Set vs Map",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "The both are used to store data. The only difference is, map is used to store key value pairs, and set is single collection of values"
+      },
+      {
+       "t": "text",
+       "v": "`"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Diagram comparing MAP (Keys->Values: 'name'->'Ron', 'age'->'25', 'job'->'Dev') and SET (Indices->Values: 0->'Rony', 1->'John', 2->'Juli')]"
+      }
+     ],
+     "id": "set-vs-map"
+    },
+    {
+     "title": "bind() vs call() and apply() ->",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Interview line: \"The classic problem was this being lost inside callbacks like setTimeout or event handlers. Old code saved it with var self = this. Then bind let you lock this directly, and finally ES6 arrow functions solved it automatically by inheriting this from the enclosing scope.\""
+      }
+     ],
+     "id": "bind-vs-call-and-apply"
+    },
+    {
+     "title": "Optional Chaining operator",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Optional chaining ?. is used to access object properties and methods in a safe way by reducing the probability of having undefined or null values"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "/** User object (such as in a response from an API) **/\nconst user = {\n  comments: null,\n  posts: [],\n  profile: {\n    name: \"Parimal\",\n    email: undefined,\n  },\n  location: null,\n};\n\n/** ⚡ With optional chaining **/\nconsole.log(user?.username); /** Returns: undefined (no runtime error) **/\n\nconsole.log(user?.profile?.name); /** Returns: Parimal **/\n\nconsole.log(user?.location?.city); /** Returns: undefined (no runtime error) **/"
+      },
+      {
+       "t": "text",
+       "v": "Example: obj.val?.prop - Accesses the prop property of the obj.val object, only if obj.val exists and is not null or undefined"
+      },
+      {
+       "t": "text",
+       "v": "“This” Keyword"
+      },
+      {
+       "t": "text",
+       "v": "this refers to the object that is executing the current function (current execution scope)"
+      },
+      {
+       "t": "text",
+       "v": "Takeaway:"
+      },
+      {
+       "t": "text",
+       "v": "When used in global, this refer to window itself. If in node, empty object"
+      },
+      {
+       "t": "text",
+       "v": "."
+      }
+     ],
+     "id": "optional-chaining-operator"
+    },
+    {
+     "title": "Generators (optional)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "https://www.youtube.com/watch?v=IJ6EgdiI_wU"
+      },
+      {
+       "t": "text",
+       "v": "generator functions have the capability to pause the execution in between with the help of the yield keyword"
+      },
+      {
+       "t": "text",
+       "v": "It returns  a generator object and you run with next. Every next wil invoke until each yield"
+      },
+      {
+       "t": "text",
+       "v": "Generator.next to invoke"
+      },
+      {
+       "t": "text",
+       "v": "Generator.return to end the generator"
+      },
+      {
+       "t": "text",
+       "v": "One use case: You can generate ids, you can call a function and ask it to return id."
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function* generateId() {\n  let id = 1\n\n  while (true) {\n    yield id\n    id++\n  }\n}\n\nconst generatorObject = simpleGenerator()\nconsole.log(generatorObject.next())\nconsole.log(generatorObject.next())\nconst generatorObject2 = simpleGenerator()\nconsole.log(generatorObject.next())\nconsole.log(generatorObject.next())"
+      }
+     ],
+     "id": "generators-optional"
+    },
+    {
+     "title": "Cookie vs local/Session vs indexDB",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Local storage and session storage and cookie both store key value pairs as string"
+      },
+      {
+       "t": "text",
+       "v": "Local storage will persist data whereas session storage data is deleted once browser is closed. Only for client usage"
+      },
+      {
+       "t": "text",
+       "v": "Cookie, you get set expiration data after which it will be deleted, if no expiration after browser close it is deleted. This will be sent to server, for server usage"
+      },
+      {
+       "t": "text",
+       "v": "Usecase: Server can get data from cookie to track session status."
+      },
+      {
+       "t": "text",
+       "v": "For cookie: Security options storage doesn't have:"
+      },
+      {
+       "t": "text",
+       "v": "- HttpOnly → JavaScript cannot read the cookie → protects against XSS attacks stealing tokens. (localStorage is fully readable by any JS → riskier for tokens.)"
+      },
+      {
+       "t": "text",
+       "v": "- Secure → only sent over HTTPS."
+      },
+      {
+       "t": "text",
+       "v": "- SameSite → protects against CSRF attacks."
+      },
+      {
+       "t": "text",
+       "v": "indexDB: can store key, value and objects"
+      },
+      {
+       "t": "text",
+       "v": "Operations are async"
+      }
+     ],
+     "id": "cookie-vs-local-session-vs-indexdb"
+    },
+    {
+     "title": "Array Methods:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "indexOf vs findIndex"
+      },
+      {
+       "t": "text",
+       "v": "they both give you index of the element, but findIndex you can pass function, indexOf is simpli you pass element and it gives you index"
+      }
+     ],
+     "id": "array-methods"
+    },
+    {
+     "title": "Hoisting interview questions",
+     "blocks": [
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var a = 1;\nfunction b() { \n   a = 10; \n   return;\n   function a() {"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "   }\n}\nb();\nconsole.log(a);\n// output: 10"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function foo(){   \n   function bar() {       \n       return 3;   \n   }   \n   function bar() {       \n       return 8;   \n   }\n   return bar();   "
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "}\nalert(foo());\n// output: 8"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function parent() {   \n   var hoisted = \"I'm a variable\";   \n   function hoisted() {       \n       return \"I'm a function\";   \n   }   \n   return hoisted();\n}\nconsole.log(parent());\n// output: Not a function error"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "alert(foo());\nfunction foo() { \n   var bar = function() {   \n       return 3; \n   }; \n   return bar(); \n   var bar = function() {   \n       return 8; \n   };\n}\n// output: 3"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var myVar = 'foo';\n(function() { \n   console.log('Original value was: ' + myVar); \n   var myVar = 'bar'; \n   console.log('New value is: ' + myVar);\n})();\n// output: undefined, bar"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var myVar = 'foo';\n(function() { \n   console.log('Original value was: ' + myVar); \n   myVar = 'bar'; \n   console.log('New value is: ' + myVar);\n})();\n// output: foo, bar"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var myVar = 'foo';\n(function() { \n   console.log('Original value was: ' + myVar); \n   let myVar = 'bar'; \n   console.log('New value is: ' + myVar);\n})();\n// output: cannot access befor ini, bar"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "https://www.freecodecamp.org/news/function-hoisting-hoisting-interview-questions-b6f91dbc2be8/\n/////////////////////////////////////////\nTAKE AWAY: function is priority in hoisting over variable if same name\nalert(foo());\nfunction foo() { \n   var bar = function() {   \n       return 3; \n   }; \n   return bar(); \n   var bar = function() {   \n       return 8; \n   };\n}\nOutput: 3\n/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var x = 1;"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function foo() {\nx = 10;\nreturn;"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function x() {}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "foo();"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "console.log(x);\nOutput: 1;\n/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function foo(){   \n   function bar() {       \n       return 3;   \n   }   \n   return bar();   \n   function bar() {       \n       return 8;   \n   }\n}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "alert(foo());\noutput: 8\n/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "var a = 1;"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function b() {  a = 10;  return;"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": " function a() {}}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "b();"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "console.log(a);\nOutput: 1"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function parent() {   \n   var hoisted = \"I'm a variable\";   \n   function hoisted() {       \n       return \"I'm a function\";   \n   }   \n   return hoisted();\n}\nconsole.log(parent());\nOutput: “TypeError: hoisted is not a function”\n/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "/////////////////////////////////////////"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function a() {\n   for (var i = 0; i < 3; i++) {\n       setTimeout(() => {\n           console.log(i)\n       }, i * 1000)\n   }\n}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "a()\nOutput: 3 3 3"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "function a() {\n   for (let i = 0; i < 3; i++) {\n       setTimeout(() => {\n           console.log(i)\n       }, i * 1000)\n   }\n}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "a()\nOutput: 0,1,2"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Slide titled 'what you see..' vs 'behind the scenes...' illustrating var hoisting, where var a is hoisted to the top with function hoistingExample() { a = 1; }]"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Slide 'guess the output...' vs 'behind the scenes...' showing var a=1 declared inside function scope hoisted only within the function, so console.log(a) outside throws ReferenceError: a is not defined]"
+      },
+      {
+       "t": "text",
+       "v": "When same function and variable defined, that name becomes local scope"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Side-by-side 'Guess the output' vs 'Behind the scenes' showing function hoisting where function test() {} is hoisted, test=10 is local, and console.log(test) prints 1]"
+      },
+      {
+       "t": "text",
+       "v": "var a =5;"
+      },
+      {
+       "t": "text",
+       "v": "console.log(a++);"
+      },
+      {
+       "t": "text",
+       "v": "console.log(a)"
+      },
+      {
+       "t": "text",
+       "v": "Output: 5 , 6 // it will console log a and then it will increment"
+      },
+      {
+       "t": "text",
+       "v": "console.log(1 < 2 < 3)"
+      },
+      {
+       "t": "text",
+       "v": "1 < 2 => true"
+      },
+      {
+       "t": "text",
+       "v": "True < 3 => true // true is treated as 1 and false is treated as zero"
+      },
+      {
+       "t": "text",
+       "v": "Output: true"
+      },
+      {
+       "t": "text",
+       "v": "console.log(typeof typeof 4)=> output: strng"
+      },
+      {
+       "t": "text",
+       "v": "—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-"
+      },
+      {
+       "t": "text",
+       "v": "Addition will return concatenated string…whereas other arithmetic operators will automatically convert string to number and will compute"
+      },
+      {
+       "t": "text",
+       "v": "console.log(\"12\"-2) => output 10"
+      },
+      {
+       "t": "text",
+       "v": "\"\" + 1          === \"1\""
+      },
+      {
+       "t": "text",
+       "v": "\"1\" + 10        === \"110\""
+      },
+      {
+       "t": "text",
+       "v": "\"110\" + 2       === \"1102\""
+      },
+      {
+       "t": "text",
+       "v": "\"1102\" - 5      === 1097"
+      },
+      {
+       "t": "text",
+       "v": "1097 + \"8\"      === \"10978\""
+      },
+      {
+       "t": "text",
+       "v": "More examples:"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "console.log(\"12\"-2) //10\nconsole.log(+\"12\"+2) /14\nconsole.log(\"12\"+2) // “122”\nconsole.log(\"12\"*2) // 24\nconsole.log(\"12\"/2) //6"
+      },
+      {
+       "t": "text",
+       "v": "—-—-—-—-—-—-—-—-—-—-—-—-—-"
+      },
+      {
+       "t": "text",
+       "v": "a"
+      },
+      {
+       "t": "code",
+       "lang": "ts",
+       "v": "console.log(\"Hel\nfunction foo(a, ...rest, c) {\n    console.log(a, rest, c);\n}\n\nfoo(1, 2, 3, 4, 5)"
+      },
+      {
+       "t": "text",
+       "v": "TO-DO:"
+      },
+      {
+       "t": "text",
+       "v": "- Promises, async/await, callback hell"
+      },
+      {
+       "t": "text",
+       "v": "- Event Loop (macro vs microtask — very commonly asked)"
+      },
+      {
+       "t": "text",
+       "v": "- Event bubbling & capturing"
+      },
+      {
+       "t": "text",
+       "v": "- Deep vs shallow copy"
+      },
+      {
+       "t": "text",
+       "v": "- __proto__ vs Prototype"
+      },
+      {
+       "t": "text",
+       "v": "- Set vs Map"
+      },
+      {
+       "t": "text",
+       "v": "- Arrow vs normal functions"
+      },
+      {
+       "t": "text",
+       "v": "- Generators, optional chaining, rest params"
+      },
+      {
+       "t": "text",
+       "v": "- Array methods"
+      },
+      {
+       "t": "text",
+       "v": "- TypeScript type guards"
+      },
+      {
+       "t": "text",
+       "v": "- Dynamically vs statically typed"
+      },
+      {
+       "t": "text",
+       "v": "Global vs Module Scope"
+      },
+      {
+       "t": "text",
+       "v": "Mutation observer API"
+      },
+      {
+       "t": "text",
+       "v": "Memory leaks:"
+      },
+      {
+       "t": "text",
+       "v": "Not removing event listeners"
+      },
+      {
+       "t": "text",
+       "v": "You keep pushing something to cache, but never clears it"
+      },
+      {
+       "t": "text",
+       "v": "Setinterval, you keep dng that big data job"
+      },
+      {
+       "t": "text",
+       "v": "function createLeak() {"
+      },
+      {
+       "t": "text",
+       "v": "const bigData = new Array(1000000).fill(\"x\");   // big object"
+      },
+      {
+       "t": "text",
+       "v": "return function () {"
+      },
+      {
+       "t": "text",
+       "v": "console.log(bigData.length);   // closure keeps bigData alive"
+      },
+      {
+       "t": "text",
+       "v": "};"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "text",
+       "v": "const leak = createLeak();   // leak holds bigData forever"
+      },
+      {
+       "t": "text",
+       "v": "What happens:"
+      },
+      {
+       "t": "text",
+       "v": "- createLeak() finishes → normally bigData would be garbage-collected."
+      },
+      {
+       "t": "text",
+       "v": "- But the returned function still uses bigData (closure) → so it can't be freed."
+      },
+      {
+       "t": "text",
+       "v": "- As long as leak exists, that huge array stays in memory. ❌"
+      },
+      {
+       "t": "text",
+       "v": "Event loop"
+      },
+      {
+       "t": "text",
+       "v": "Async: Callbacks, Promises, async/await"
+      },
+      {
+       "t": "text",
+       "v": "Pagination: ?limit=&offset= or cursor-based. ()"
+      },
+      {
+       "t": "text",
+       "v": "Cursor is better, you ask my after created_at, after id"
+      },
+      {
+       "t": "text",
+       "v": "Offset: only problem, when someone inserts the row. And data gets disturbed ()"
+      },
+      {
+       "t": "text",
+       "v": "EventEmitter"
+      },
+      {
+       "t": "text",
+       "v": "Streams & Buffers"
+      },
+      {
+       "t": "text",
+       "v": "Modules"
+      },
+      {
+       "t": "text",
+       "v": "(CommonJS vs ESM)"
+      },
+      {
+       "t": "text",
+       "v": "Runtime, compile time"
+      },
+      {
+       "t": "text",
+       "v": "Import export or mjx"
+      },
+      {
+       "t": "text",
+       "v": "Tree shaking"
+      },
+      {
+       "t": "text",
+       "v": "Statically, dynamically"
+      },
+      {
+       "t": "text",
+       "v": "Set vs list"
+      },
+      {
+       "t": "text",
+       "v": "jwt, token, authentication authorization, OAuth 2.0 —,"
+      },
+      {
+       "t": "text",
+       "v": "nextTick vs setImmediate?"
+      },
+      {
+       "t": "text",
+       "v": "Callback hell"
+      },
+      {
+       "t": "text",
+       "v": "Middleware"
+      },
+      {
+       "t": "text",
+       "v": "(req/res/next) -> its in expres."
+      },
+      {
+       "t": "text",
+       "v": "Each framework has different styles to implement middleware"
+      },
+      {
+       "t": "text",
+       "v": "Lambda don’t need middleware as its single handle with event and context"
+      },
+      {
+       "t": "text",
+       "v": "Middleware — notes"
+      },
+      {
+       "t": "text",
+       "v": "- What: functions that run in a chain between request and response, signature (req, res, next). next() passes control to the next one; skip it and the request stops."
+      },
+      {
+       "t": "text",
+       "v": "- Flow: Request → [logger] → [auth] → [parse] → route handler → Response"
+      },
+      {
+       "t": "text",
+       "v": "- Used for: cross-cutting concerns — authentication, logging, body parsing, CORS, rate limiting, error handling. NOT the whole app logic (the final route handler holds business logic)."
+      },
+      {
+       "t": "text",
+       "v": "- General pattern, not just Express: also in Koa, NestJS, Django, Rails, and even frontend (Redux middleware). The (req, res, next) signature specifically is Express."
+      },
+      {
+       "t": "text",
+       "v": "- Lambda: doesn't use middleware/next() — it's a single (event, context) handler that returns a response. Middleware is optional; use Middy (.use()) only if you repeat boilerplate across many functions."
+      },
+      {
+       "t": "text",
+       "v": "- Why use it (key point): DRY is only a side benefit — you can achieve DRY with plain shared functions. Middleware's real value is the automatic, enforced pipeline: it runs on every matching route automatically (can't be forgotten), can stop a request before the handler, and applies to whole route groups with one app.use()."
+      },
+      {
+       "t": "text",
+       "v": "Web socket?"
+      },
+      {
+       "t": "text",
+       "v": "Cache redis how it worked"
+      },
+      {
+       "t": "text",
+       "v": "Horizontal vs vertical scaling? Veritical meaning upgrading same machine, horizontal meaning increasing no of machines"
+      },
+      {
+       "t": "text",
+       "v": "Circuit braker?"
+      },
+      {
+       "t": "text",
+       "v": "Use osmous module"
+      },
+      {
+       "t": "text",
+       "v": "You put a wrapper around a failed function, OPEN, CLOSED, HALF OPEN"
+      },
+      {
+       "t": "text",
+       "v": "Es6 feature?"
+      },
+      {
+       "t": "text",
+       "v": "Import export"
+      },
+      {
+       "t": "text",
+       "v": "Arrow function"
+      },
+      {
+       "t": "text",
+       "v": "Let var bllock scope"
+      },
+      {
+       "t": "text",
+       "v": "Rest operation spread operation"
+      },
+      {
+       "t": "text",
+       "v": "Promisesstring interpolation, destructing"
+      },
+      {
+       "t": "text",
+       "v": "Js vs ts"
+      },
+      {
+       "t": "text",
+       "v": "Jwt:"
+      },
+      {
+       "t": "text",
+       "v": "Constits of, signature, payload(userId, action, expiry), header"
+      },
+      {
+       "t": "text",
+       "v": "Jwt token we get in postman is divided into these 3 parts"
+      },
+      {
+       "t": "text",
+       "v": "process.nextTick() = schedules a callback to run immediately after the current synchronous code finishes, before the event loop moves on to promises, timers, or"
+      },
+      {
+       "t": "text",
+       "v": "in other words"
+      },
+      {
+       "t": "text",
+       "v": "▎ process.nextTick() runs right after the current operation completes — before the event loop continues to the next phase."
+      },
+      {
+       "t": "text",
+       "v": "setImmediate()"
+      },
+      {
+       "t": "text",
+       "v": "▎ Schedules a callback to execute in the check phase of the event loop, i.e. after the current poll/I/O phase completes, on the next iteration of the loop. It runs after synchronous code, nextTick callbacks, and promise microtasks."
+      },
+      {
+       "t": "text",
+       "v": "So the order is"
+      },
+      {
+       "t": "text",
+       "v": "current sync operation finishes"
+      },
+      {
+       "t": "text",
+       "v": "↓"
+      },
+      {
+       "t": "text",
+       "v": "run nextTick + promises (microtasks)   ← squeezed in BETWEEN"
+      },
+      {
+       "t": "text",
+       "v": "↓"
+      },
+      {
+       "t": "text",
+       "v": "move to NEXT PHASE (a macrotask: timer or setImmediate)"
+      },
+      {
+       "t": "text",
+       "v": "\"Next phase\" = next macrotask stage"
+      },
+      {
+       "t": "text",
+       "v": "When I said nextTick runs \"before the loop continues to the next phase,\" I meant: before the loop moves on to the next macrotask stage (timers/setImmediate/etc)."
+      },
+      {
+       "t": "text",
+       "v": "Simple summary:"
+      },
+      {
+       "t": "text",
+       "v": "nextTick + promises  → run BETWEEN phases (not a phase themselves)"
+      },
+      {
+       "t": "text",
+       "v": "\"next phase\"         → the next MACROTASK stage (setTimeout, setImmediate, I/O)"
+      },
+      {
+       "t": "text",
+       "v": "So: microtasks run first (between phases), then the loop enters the next macrotask phase. ✅"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Article text about setImmediate() executing in the check phase of the event loop and a Key contrast comparing process.nextTick() vs setImmediate() priority]"
+      },
+      {
+       "t": "text",
+       "v": "Interface vs type"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "// Use interface for object contracts\ninterface User {\n  id: number;\n  name: string;\n}"
+      },
+      {
+       "t": "code",
+       "lang": "js",
+       "v": "// Use type for unions, tuples, and type transformations\ntype Status = \"active\" | \"inactive\";\ntype ID = string | number;\ntype Point = [number, number];"
+      },
+      {
+       "t": "text",
+       "v": "typeguards:"
+      },
+      {
+       "t": "text",
+       "v": "Same example, showing wrong (❌ error) vs right (✅ works) for each type guard:"
+      },
+      {
+       "t": "text",
+       "v": "1. typeof — string | number"
+      },
+      {
+       "t": "text",
+       "v": "// ❌ WRONG — no guard"
+      },
+      {
+       "t": "text",
+       "v": "function print(value: string | number) {"
+      },
+      {
+       "t": "text",
+       "v": "value.toUpperCase();   // Error: 'toUpperCase' does not exist on type 'number'"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "text",
+       "v": "// ✅ RIGHT — with typeof guard"
+      },
+      {
+       "t": "text",
+       "v": "function print(value: string | number) {"
+      },
+      {
+       "t": "text",
+       "v": "if (typeof value === \"string\") {"
+      },
+      {
+       "t": "text",
+       "v": "value.toUpperCase();   // ✅ TS knows it's a string"
+      },
+      {
+       "t": "text",
+       "v": "} else {"
+      },
+      {
+       "t": "text",
+       "v": "value.toFixed(2);      // ✅ TS knows it's a number"
+      },
+      {
+       "t": "text",
+       "v": "}"
+      },
+      {
+       "t": "text",
+       "v": "Generics:"
+      },
+      {
+       "t": "text",
+       "v": "Generics = a way to write reusable code that works with any type, while keeping type safety. Think of it as a type placeholder you fill in later."
+      },
+      {
+       "t": "code",
+       "lang": "ts",
+       "v": "Without generics, you either lose type safety or repeat code:\n// ❌ loses type info\nfunction identity(value: any): any {\n  return value;\n}\nconst x = identity(\"hello\");   // x is 'any' — no type safety\n\nWith generics\n\nfunction identity<T>(value: T): T {\n  return value;\n}\n\nconst a = identity<string>(\"hello\");   // T = string → returns string\nconst b = identity<number>(42);        // T = number → returns number\nconst c = identity(\"hi\");               // T inferred as string ✅\n\n<T> is a placeholder for a type. You (or TS) fill it in when calling — and the return type matches the input. Type-safe and reusable.\n\nReal example — a reusable array wrapper"
+      },
+      {
+       "t": "text",
+       "v": "You don’t want to have any in ts, it defeats the purpose of using ts over js"
+      },
+      {
+       "t": "code",
+       "lang": "text",
+       "v": "[Image: Article text 'What you lose with any' listing 4 points (No error catching, No autocomplete, It spreads, Defeats the purpose) followed by 'The comparison']"
+      }
+     ],
+     "id": "hoisting-interview-questions"
+    }
+   ]
+  },
+  {
+   "id": "ts",
+   "label": "TypeScript",
+   "topics": [
+    {
+     "title": "TypeScript Generics (optional)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "It’s a way to write reusable code which works for different types"
+      },
+      {
+       "t": "text",
+       "v": "Anytime we have a function which has data inside it, where we want that data to be changing its type based on what we pass in or based on what we return, thats when we want to use generics."
+      },
+      {
+       "t": "text",
+       "v": "It is used to write reusable and type safe code. Generics allow you to create components that can work over a variety of types rather than a single one"
+      },
+      {
+       "t": "text",
+       "v": "In"
+      },
+      {
+       "t": "code",
+       "lang": "ts",
+       "v": "function getFirstElement<ElementType>(array: ElementType[]) {\n  return array[0]\n}\n\nconst numbers = [1, 2, 3]\nconst firstNum = getFirstElement(numbers)\n\nconst strings = [\"sdf\", \"sdf\"]\nconst firstString = getFirstElement(strings)"
+      }
+     ],
+     "id": "typescript-generics-optional"
+    },
+    {
+     "title": "TypeGuards/Narrowing (optional)",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "A type guard is a TypeScript technique used to get information about the type of a variable, usually within a conditional block."
+      },
+      {
+       "t": "text",
+       "v": "instanceOf: it is used to check if a value is an instance of a class"
+      },
+      {
+       "t": "text",
+       "v": "typeOf"
+      },
+      {
+       "t": "text",
+       "v": "In -> \"house\" in { name: \"test\", house: { parts: \"door\" } }; // => true"
+      },
+      {
+       "t": "text",
+       "v": "Is"
+      },
+      {
+       "t": "text",
+       "v": "Custom: TypeScript custom type guards are functions that enable you to check the type of a value or expression at runtime. They are useful for verifying more complex types or conditions that can’t be easily checked using built-in type guards"
+      }
+     ],
+     "id": "typeguards-narrowing-optional"
+    }
+   ]
+  },
+  {
+   "id": "behavioral",
+   "label": "Behavioral",
+   "topics": [
+    {
+     "title": "WHY DID YOU DECIDE TO TAKE MASTERS",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "During my bachelors degree, even though it was computer science we used to learn lot of other subjects as well so it was never focussed only on computer science. so with that I didnt really get an opportunity to improve my skills like for example how one has to apply problem solving skills or like advanced technical skills"
+      },
+      {
+       "t": "text",
+       "v": "And doing graduation will always do good in terms of career building or to grab the oppurtunities"
+      },
+      {
+       "t": "text",
+       "v": "During that time, I even had this idea of doing PHD as a ultimate goal but right now I am just focussing on getting myself better that what I do.."
+      }
+     ],
+     "id": "why-did-you-decide-to-take-masters"
+    },
+    {
+     "title": "What challenges have you faced in past projects, and how did you overcome them",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "I could talk a lot about challenges I faced be it technical or non-technical.."
+      },
+      {
+       "t": "text",
+       "v": "To talk about technical challenges, picking the right stack of tools if always important to before we kickstart the project like sometimes we might want to use react or angular depending on the requirement or sometimes we prefer using Redux compared to using Zudstand, like this for every functionality there are multiple libraries/modules that are available in the market, so one has to decide which one suits the needs of the application and at the same time saves time during development…. If I have to talk more about technical challenges, once we start the project and once we are 1-2 months into the project, by then architecture would be finalized but a new requirement comes and now one has to think about how to fit in the new requirement into our current architecture without disturbing the flow of other micro services."
+      },
+      {
+       "t": "text",
+       "v": "To talk about non-technical challenges, sometimes trying to get the requirements from UX designers is not straight forward, like I mean, there will be back and forth discussions between UX designers and developers as to what needs to accomplished…so we both importantly trying to be on same page is very crucial for developing a project atleast from a frontend developer point of perspective. To talk more about non-technical challenges, during sprint planning we try to estimate the tasks like for example how many days does a task takes to accomplish but sometimes due to unforeseen circumstances, we might face blockers and we could fall into a situation where we couldn’t proceed further in development like there might be a dependency on infrastructure which is still being worked by devops engineer, or backend apis might not be ready or sometimes release dates might get preponed and we have to work harder to meet the deadlines or it could be other way round, where new requirements might get added but should be delivered."
+      }
+     ],
+     "id": "what-challenges-have-you-faced-in-past-projects-and-how-did-"
+    },
+    {
+     "title": "Tell me about the recent issue you faced / Tell me about the recent issue you faced and you have to take the blame / Anything on similar lines, if they are asking about recent issue",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "I can talk about a recent issue that I faced just 2 weeks back. I recently worked on a new project where the frontend and backend interact with the aws services especially in this issue it was interacting with the secret manager. So generally how AWS works is, the secret manager is restricted to a region, like it could be in any region like us-east-1 or us-west-1 etc…in my case here we created the secret manager resource in us-east-1 region… So during our internal testing in stage environment, all our users tested the application from east coast so it worked fantastic… But when we pushed it to prod, one user was facing a issue logging into the application, so everyone thought it was a frontend issue/ backend issue (depending on the question blame either frontend or backend)...."
+      },
+      {
+       "t": "text",
+       "v": "Two scenarios:"
+      },
+      {
+       "t": "text",
+       "v": "First scenario:"
+      }
+     ],
+     "id": "tell-me-about-the-recent-issue-you-faced-tell-me-about-the-r"
+    },
+    {
+     "title": "Tell this when they ask, did you take blame for others mistake like that",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Actually it was a backend issue but since the login page was not working, everyone started blaming the frontend code and we as a team were literally digging thru the code to see where it could have possibly gone wrong. But after spending hours eventhough I am a frontend developer I somewhere felt backend was doing something wrong, and I went thru the loggin micro service in backend and I pointed out that in backend the region name where the secret manager was created is not coded… so what it was doing is, when the user logged from west coast, the application checked the secret manager in west coast region but in reality we created secret manager in east coast.. So backend should have coded in search a way that the application should look for secret manager in east coast…so after doing the bug fix, it worked…"
+      },
+      {
+       "t": "text",
+       "v": "So basically I just not only confirmed that frontend is working good, I also pointed out the issue in backend. So I really got appreciation from my colleagues.. Until then I was under real pressure figuring out whats going on bcoz if its failing for all users its simple to debug but if its failing for 1 user out of 100, then its very difficult to identity the root cause."
+      },
+      {
+       "t": "text",
+       "v": "Second scenario:"
+      },
+      {
+       "t": "text",
+       "v": "Same scenario as above but tell that in frontend code I missed mentioning which region the secret manager was created… so once I added the fix on frontend it started working.."
+      },
+      {
+       "t": "text",
+       "v": "If you are talking as if its someone else’s issue, tell the code fix was done in backend."
+      },
+      {
+       "t": "text",
+       "v": "If you are talking as if its you issue,  tell the code fix was done in frontend."
+      }
+     ],
+     "id": "tell-this-when-they-ask-did-you-take-blame-for-others-mistak"
+    },
+    {
+     "title": "What process do you follow:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Gather requirements from UX designers"
+      },
+      {
+       "t": "text",
+       "v": "Sprint velocity -? How much each person can finish story points => nov 1st deadline"
+      },
+      {
+       "t": "text",
+       "v": "Sprint planning"
+      },
+      {
+       "t": "text",
+       "v": "Sprint standups"
+      },
+      {
+       "t": "text",
+       "v": "Sprint backlog refinement"
+      },
+      {
+       "t": "text",
+       "v": "Sprint Demo"
+      },
+      {
+       "t": "text",
+       "v": "Sprint Retro"
+      },
+      {
+       "t": "text",
+       "v": "Again start with sprint planning"
+      },
+      {
+       "t": "text",
+       "v": "Do releases as and when functionality or couple of functionality are ready to be released"
+      },
+      {
+       "t": "text",
+       "v": "Gather feedback and do bug fixes"
+      }
+     ],
+     "id": "what-process-do-you-follow"
+    },
+    {
+     "title": "What do you bring with you to this company along with you / Why Should we hire you?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "I am very confident at my technical skills and all thru my career I have been working on the tools which are being used at Savynt like React and Redux so in that sense technically I should be a good resource for Savynt. But I understand that being just technical is not sufficient, one needs to have non technical skills like"
+      },
+      {
+       "t": "text",
+       "v": "How to solve a situation"
+      },
+      {
+       "t": "text",
+       "v": "How to get work done from others"
+      },
+      {
+       "t": "text",
+       "v": "Communication/Collaboration"
+      },
+      {
+       "t": "text",
+       "v": "Logical thinking not in the sense of coding but important to have to make critical decisions during the process of release cycle."
+      },
+      {
+       "t": "text",
+       "v": "Ability to take critical decisions during tough times like while in middle of deployment or while there is a production issue"
+      },
+      {
+       "t": "text",
+       "v": "So I feel I am pretty good at these."
+      }
+     ],
+     "id": "what-do-you-bring-with-you-to-this-company-along-with-you-wh"
+    },
+    {
+     "title": "If you have any concerns with one person in the team, how do you try to go about it./ How do you workout with a person with whom you have a issue or ego something like that / how do you make sure you dont run into any issues with colleagues",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "I think most of the times, misunderstanding happen while we try to discuss something technically. So its very common that two minds might not be on the same page so misunderstandings can happen.. But its very important to identify it before it gets too late… for example , if one of my colleague is trying to make a point and if I am not willing to accept that suggestion or vice versa.. I should take a step back and let the other person finish making his point. If the point what he makes makes sense, its well and good, appreciate it and complement it. Lets say, its not a good idea, I think we should still listen to it and after he finishes making his point, try to bring up the pros and cons if taking that approach.. Weigh the pros and cons of all the parties involved if necessary.. I think once you put all points side by side and you figure out which point makes more sense with more pros, we should go with that one. And since we all work for the betterment of application, if the other person point has more disadvantages to it, I am very sure one would get convinced."
+      }
+     ],
+     "id": "if-you-have-any-concerns-with-one-person-in-the-team-how-do-"
+    },
+    {
+     "title": "His next question. What if he still doesnt get convinced?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Bring in a third person or maybe a senior and explain the situation, and take their inputs. In absence of a senior, If I have the control over making the decision I would go with my decision and later on will personally try to sought the issue with my colleague. Because application is the priority just bcoz its disturbing the relation with a colleague I think it should never impact the application. One can always make the relation better with the colleague, offer a free lunch, go after office hangout, explain him more slowly as to why I had to take that decision"
+      }
+     ],
+     "id": "his-next-question-what-if-he-still-doesnt-get-convinced"
+    },
+    {
+     "title": "How do you talk about any concerns or issues you have with your management or leadership",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Generally most of the times I prefer not to talk directly about the issue like in the sense one on one. Because I somehow feel it doesn’t work, it will effect the relation… so what I do most of the times and have been doing is, We generally have sprint retros as we follow agile methodology. So in sprint retros we talk about both good and bad things that happened during the sprint. So if there is something that I felt didnt work well for the team because of a leadership decision I bring that up in the sprint retros. I explain why its not working out for us. So whatever we discuss in retros needs to be taken as feedback bcoz thats the goal of having retros. So leadership will indirectly get to know what we are complaining about and they try to rethink about their decision and will let us know."
+      },
+      {
+       "t": "text",
+       "v": "And again, if they dont change their decision, I take it as OKAY, maybe this is what is good for the company or for the application bcoz as a develope  I sometimes might not have bigger picture of the roadmap so I will take it easy and will align myself according to the decision"
+      }
+     ],
+     "id": "how-do-you-talk-about-any-concerns-or-issues-you-have-with-y"
+    },
+    {
+     "title": "How do you prioritize tasks and manage time effectively in a fast-paced IT environment?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "So basically how you manage tasks ani asking, so again start by saying that you follow agile methodology,.. So when we are following the process, it aligns everything in place without the need for putting conscious effect"
+      }
+     ],
+     "id": "how-do-you-prioritize-tasks-and-manage-time-effectively-in-a"
+    },
+    {
+     "title": "How do you handle conflicts within your team? Can you provide an example?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "I already spoke above this above like how you handle issue with colleague…"
+      },
+      {
+       "t": "text",
+       "v": "When they ask how to handle conflicts, first question you should ask yourself is, why does conflict happen and then try to address that conflict that way you give lenghtier answer"
+      }
+     ],
+     "id": "how-do-you-handle-conflicts-within-your-team-can-you-provide"
+    },
+    {
+     "title": "Can you describe a time when you had to manage a team through a difficult project? What was your approach?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "In my current company most of the times the project I worked on were always a demanding projects which needs to delivered with strict deadlines, so I am pretty used to handle those kind of pressures."
+      },
+      {
+       "t": "text",
+       "v": "So what I would do is, I will try to keep it simple, breakdown the requirements into user stories, and then into tasks and sub tasks. Estimate those tasks… if there are any tasks which are estimated to take more time than we have, try to negotiate those tasks with product owner and come to an agreement."
+      },
+      {
+       "t": "text",
+       "v": "When you follow agile methodology, the benefit it gives is to have daily standups in the team, and during standsup you take the status from each person and try to evaluate if you are on right track to finish the project… like i said, break it down into sprint, aim for finishing tasks that are taken in sprint.. And when we look back we will be surprised to see how organized everything went on"
+      }
+     ],
+     "id": "can-you-describe-a-time-when-you-had-to-manage-a-team-throug"
+    },
+    {
+     "title": "You are talking more about process, but in savynt we dont have process, so how you go about it.",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Fortunately or unfortunately, when I joined my previous both companies we never had a process. We tried to bring that change in the team. And slowly we started accommodating for the process. Initially one has to spend some time to layout the process but after 2-3 sprints I think everything falls in place on its own.  So I am used to work in both kind of environments in my career in fact to be honest not all projects in our company follow the process so I have been part of all different soughts of projects."
+      }
+     ],
+     "id": "you-are-talking-more-about-process-but-in-savynt-we-dont-hav"
+    },
+    {
+     "title": "How do you measure the success of a project or team? What key performance indicators (KPIs) do you use?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "met deadlines release bigger?"
+      },
+      {
+       "t": "text",
+       "v": "met sprint goals?"
+      },
+      {
+       "t": "text",
+       "v": "Relation with colleagues"
+      },
+      {
+       "t": "text",
+       "v": "TBD"
+      }
+     ],
+     "id": "how-do-you-measure-the-success-of-a-project-or-team-what-key"
+    },
+    {
+     "title": "How do you handle underperforming team members?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "TBD"
+      }
+     ],
+     "id": "how-do-you-handle-underperforming-team-members"
+    },
+    {
+     "title": "What is your experience with Agile/Scrum methodologies? How have you implemented them in your teams?",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "Same answers as above"
+      }
+     ],
+     "id": "what-is-your-experience-with-agile-scrum-methodologies-how-h"
+    },
+    {
+     "title": "How do you implement Security:",
+     "blocks": [
+      {
+       "t": "text",
+       "v": "How much data you want to send to other destination server,, just url. History or any other data"
+      },
+      {
+       "t": "text",
+       "v": "To main htps, for how long, even if user enters http, redirect to https"
+      },
+      {
+       "t": "text",
+       "v": "Header: Content-Security-Policy"
+      },
+      {
+       "t": "text",
+       "v": "- who can access sites"
+      },
+      {
+       "t": "text",
+       "v": "To avoid mime sniffing"
+      },
+      {
+       "t": "text",
+       "v": "Consider a scenario where an attacker manages to upload a malicious file to a web server, but the file is served with a text/plain MIME type. Without the X-Content-Type-Options: nosniff header, some browsers might incorrectly interpret the file as a script and execute it, leading to potential security breaches. By using nosniff, you can ensure that the browser will block the execution of the file because its MIME type does not match what the browser expects for executable content."
+      },
+      {
+       "t": "text",
+       "v": "For avoiding using as iframe"
+      },
+      {
+       "t": "text",
+       "v": "Check dependencies version"
+      },
+      {
+       "t": "text",
+       "v": "Check Cors policy in backend api"
+      },
+      {
+       "t": "text",
+       "v": "Do not user innerHTML"
+      },
+      {
+       "t": "text",
+       "v": "Protect with Akamai against DDOS attacks"
+      },
+      {
+       "t": "text",
+       "v": "Sanitize user input"
+      },
+      {
+       "t": "text",
+       "v": "Logging in place"
+      },
+      {
+       "t": "text",
+       "v": "DOMpurify"
+      },
+      {
+       "t": "text",
+       "v": "Have a single sign on"
+      }
+     ],
+     "id": "how-do-you-implement-security"
+    }
+   ]
+  }
+ ]
+}
