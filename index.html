@@ -50,7 +50,9 @@
 
   main{flex:1;overflow-y:auto;min-width:0;}
   .content{max-width:1000px;margin:0 auto;padding:22px 26px 80px;}
-  .topic-title{font-size:22px;font-weight:700;margin:0 0 4px;line-height:1.3;}
+  .topic-section{padding:14px 0 22px;border-bottom:1px solid var(--border);scroll-margin-top:14px;}
+  .topic-section:last-child{border-bottom:none;}
+  .topic-title{font-size:22px;font-weight:700;margin:0 0 4px;line-height:1.3;scroll-margin-top:14px;}
   .topic-title-input{font-size:22px;font-weight:700;width:100%;background:var(--bg);color:var(--text);
     border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin-bottom:8px;}
   .tab-crumb{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
@@ -108,7 +110,7 @@
     <div class="tlist" id="tlist"></div>
     <button class="primary addtopic" id="addTopicBtn" onclick="addTopic()">+ Add topic</button>
   </aside>
-  <main><div class="content" id="content"></div></main>
+  <main id="main" onscroll="onScrollSpy()"><div class="content" id="content"></div></main>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -149,43 +151,74 @@ function curTopic(){const id=activeTopic[activeTab];return curTab().topics.find(
 function renderTopics(){
   const list=$('#tlist'); list.innerHTML='';
   const q=($('#search').value||'').toLowerCase();
-  const cur=curTopic();
+  const curId=activeTopic[activeTab];
   curTab().topics.forEach(tp=>{
     if(q && !(tp.title.toLowerCase().includes(q) || tp.blocks.some(b=>(b.v||'').toLowerCase().includes(q)))) return;
-    const it=el('div','titem'+(cur&&tp.id===cur.id?' active':''),tp.title||'(untitled)');
-    it.onclick=()=>{activeTopic[activeTab]=tp.id;renderTopics();renderContent();document.querySelector('aside').classList.remove('open');};
+    const it=el('div','titem'+(tp.id===curId?' active':''),tp.title||'(untitled)');
+    it.dataset.id=tp.id;
+    it.onclick=()=>{scrollToTopic(tp.id);document.querySelector('aside').classList.remove('open');};
     list.appendChild(it);
   });
   $('#addTopicBtn').style.display=editMode?'':'none';
 }
 
-function renderContent(){
-  const c=$('#content'); c.innerHTML='';
-  const tp=curTopic();
-  c.appendChild(el('div','tab-crumb',curTab().label));
-  if(!tp){ c.appendChild(el('div','empty','No topics yet. Turn on ✏️ Edit and click "+ Add topic".')); return; }
-  // title
-  if(editMode){
-    const ti=el('input','topic-title-input'); ti.value=tp.title;
-    ti.oninput=()=>{tp.title=ti.value;save();renderTopics();};
-    c.appendChild(ti);
-  } else {
-    c.appendChild(el('h2','topic-title',tp.title));
-  }
-  // blocks
-  tp.blocks.forEach((b,idx)=> c.appendChild(editMode?editBlock(tp,b,idx):viewBlock(b)));
-  if(!tp.blocks.length && !editMode) c.appendChild(el('div','empty','(empty topic)'));
-  // edit controls
-  if(editMode){
-    const bar=el('div','addblock');
-    const at=el('button','small','+ Text'); at.onclick=()=>{tp.blocks.push({t:'text',v:''});save();renderContent();};
-    const ac=el('button','small','+ Code'); ac.onclick=()=>{tp.blocks.push({t:'code',lang:'js',v:''});save();renderContent();};
-    const sp=el('span','sp'); sp.style.flex='1';
-    const del=el('button','small danger','🗑 Delete topic'); del.onclick=()=>deleteTopic(tp);
-    bar.appendChild(at);bar.appendChild(ac);bar.appendChild(sp);bar.appendChild(del);
-    c.appendChild(bar);
-  }
+function scrollToTopic(id){
+  const sec=document.querySelector('.topic-section[data-id="'+CSS.escape(id)+'"]');
+  if(sec){ sec.scrollIntoView({behavior:'smooth',block:'start'}); setActive(id); }
 }
+function setActive(id){
+  if(activeTopic[activeTab]===id) return;
+  activeTopic[activeTab]=id;
+  document.querySelectorAll('#tlist .titem').forEach(it=>it.classList.toggle('active',it.dataset.id===id));
+  // keep active item visible in the sidebar
+  const a=document.querySelector('#tlist .titem.active'); if(a) a.scrollIntoView({block:'nearest'});
+}
+let spyTicking=false;
+function onScrollSpy(){
+  if(spyTicking) return; spyTicking=true;
+  requestAnimationFrame(()=>{
+    spyTicking=false;
+    const secs=document.querySelectorAll('.topic-section');
+    let curId=null;
+    const top=$('#main').getBoundingClientRect().top+90;
+    secs.forEach(s=>{ if(s.getBoundingClientRect().top<=top) curId=s.dataset.id; });
+    if(!curId && secs.length) curId=secs[0].dataset.id;
+    if(curId) setActive(curId);
+  });
+}
+
+function renderContent(scrollTop){
+  const c=$('#content'); c.innerHTML='';
+  c.appendChild(el('div','tab-crumb',curTab().label));
+  const topics=curTab().topics;
+  if(!topics.length){ c.appendChild(el('div','empty','No topics yet. Turn on ✏️ Edit and click "+ Add topic".')); return; }
+  topics.forEach(tp=>{
+    const sec=el('section','topic-section'); sec.dataset.id=tp.id;
+    if(editMode){
+      const ti=el('input','topic-title-input'); ti.value=tp.title;
+      ti.oninput=()=>{tp.title=ti.value;save();
+        const it=document.querySelector('#tlist .titem[data-id="'+CSS.escape(tp.id)+'"]'); if(it)it.textContent=ti.value;};
+      sec.appendChild(ti);
+    } else {
+      sec.appendChild(el('h2','topic-title',tp.title));
+    }
+    tp.blocks.forEach((b,idx)=> sec.appendChild(editMode?editBlock(tp,b,idx):viewBlock(b)));
+    if(!tp.blocks.length && !editMode) sec.appendChild(el('div','empty','(empty topic)'));
+    if(editMode){
+      const bar=el('div','addblock');
+      const at=el('button','small','+ Text'); at.onclick=()=>{tp.blocks.push({t:'text',v:''});save();renderContent(getScroll());};
+      const ac=el('button','small','+ Code'); ac.onclick=()=>{tp.blocks.push({t:'code',lang:'js',v:''});save();renderContent(getScroll());};
+      const sp=el('span','sp'); sp.style.flex='1';
+      const del=el('button','small danger','🗑 Delete topic'); del.onclick=()=>deleteTopic(tp);
+      bar.appendChild(at);bar.appendChild(ac);bar.appendChild(sp);bar.appendChild(del);
+      sec.appendChild(bar);
+    }
+    c.appendChild(sec);
+  });
+  if(scrollTop!=null) $('#main').scrollTop=scrollTop; else $('#main').scrollTop=0;
+  onScrollSpy();
+}
+function getScroll(){return $('#main').scrollTop;}
 
 function viewBlock(b){
   const w=el('div','block');
@@ -228,7 +261,7 @@ function editBlock(tp,b,idx){
   return w;
 }
 
-function toggleEdit(){editMode=!editMode;$('#editBtn').classList.toggle('on',editMode);renderTopics();renderContent();
+function toggleEdit(){const s=getScroll();editMode=!editMode;$('#editBtn').classList.toggle('on',editMode);renderTopics();renderContent(s);
   toast(editMode?'Edit mode on — changes save automatically':'Edit mode off');}
 
 function addTopic(){
@@ -237,6 +270,7 @@ function addTopic(){
   let id=base,n=1; const ids=new Set(curTab().topics.map(t=>t.id)); while(ids.has(id)) id=base+'-'+(n++);
   const tp={id,title,blocks:[]}; curTab().topics.push(tp); activeTopic[activeTab]=id;
   save();renderTabs();renderTopics();renderContent();
+  setTimeout(()=>scrollToTopic(id),0);
 }
 function deleteTopic(tp){
   if(!confirm('Delete topic "'+tp.title+'"? This removes it from your local copy.')) return;
